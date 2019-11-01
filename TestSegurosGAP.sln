@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TestSegurosGAP", "TestSegurosGAP\TestSegurosGAP.vbproj", "{43A66597-13F8-4B69-B7E9-9278B2DD7258}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TestSegurosGAP.Tests", "TestSegurosGAP.Tests\TestSegurosGAP.Tests.vbproj", "{0068DBB7-1326-4BD0-B74B-90B720EE82F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43A66597-13F8-4B69-B7E9-9278B2DD7258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43A66597-13F8-4B69-B7E9-9278B2DD7258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43A66597-13F8-4B69-B7E9-9278B2DD7258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43A66597-13F8-4B69-B7E9-9278B2DD7258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0068DBB7-1326-4BD0-B74B-90B720EE82F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0068DBB7-1326-4BD0-B74B-90B720EE82F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0068DBB7-1326-4BD0-B74B-90B720EE82F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0068DBB7-1326-4BD0-B74B-90B720EE82F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8ADE1BB-6A3A-46E7-BF5B-7D7457D74EEB}
+	EndGlobalSection
+EndGlobal
