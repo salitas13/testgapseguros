@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSegurosGAP.AccesoDatos
+namespace TestSegurosGAP.AccesoDatos.EFProvider.DataContext
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using TestSegurosGAP.Entidades;
+
     public partial class TestSegurosGAPEntities : DbContext
     {
         public TestSegurosGAPEntities()

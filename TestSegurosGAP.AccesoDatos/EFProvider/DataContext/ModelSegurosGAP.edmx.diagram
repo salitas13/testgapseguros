@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d31afa9913b43eba743232b078daec3" Name="Diagram1">
-        <EntityTypeShape EntityType="TestSegurosGAPModel.Cliente" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+      <Diagram DiagramId="459b25aa8fd74ecd89d3b7adba527f05" Name="Diagram1">
         <EntityTypeShape EntityType="TestSegurosGAPModel.Poliza" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TestSegurosGAPModel.TipoCubrimiento" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestSegurosGAPModel.TipoRiesgo" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoCubrimiento" ManuallyRouted="false" />
-        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoRiesgo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestSegurosGAPModel.TipoRiesgo" Width="1.5" PointX="0.75" PointY="7.875" />
+        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoRiesgo" />
+        <EntityTypeShape EntityType="TestSegurosGAPModel.Cliente" Width="1.5" PointX="0.75" PointY="1.75" />
+        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_Cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

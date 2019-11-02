@@ -15,9 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.Negocio", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.Utilidades", "TestSegurosGAP.Utilidades\TestSegurosGAP.Utilidades.csproj", "{C9491BEF-9486-4AFD-BB55-C49131279B71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.Modelos", "TestSegurosGAP.Modelos\TestSegurosGAP.Modelos.csproj", "{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.Entidades", "TestSegurosGAP.Modelos\TestSegurosGAP.Entidades.csproj", "{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.AccesoDatos", "TestSegurosGAP.AccesoDatos\TestSegurosGAP.AccesoDatos.csproj", "{602A48F5-4A39-4EE1-91AD-736183158B61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.AccesoDatos", "TestSegurosGAP.AccesoDatos\TestSegurosGAP.AccesoDatos.csproj", "{DED215AE-F13B-4F56-AC10-123AB97A90D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSegurosGAP.ModeloDatos", "TestSegurosGAP.ModeloDatos\TestSegurosGAP.ModeloDatos.csproj", "{5F778E56-4BBA-445B-BB00-743B90284A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +55,14 @@ Global
 		{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{602A48F5-4A39-4EE1-91AD-736183158B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{602A48F5-4A39-4EE1-91AD-736183158B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{602A48F5-4A39-4EE1-91AD-736183158B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{602A48F5-4A39-4EE1-91AD-736183158B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED215AE-F13B-4F56-AC10-123AB97A90D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED215AE-F13B-4F56-AC10-123AB97A90D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED215AE-F13B-4F56-AC10-123AB97A90D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED215AE-F13B-4F56-AC10-123AB97A90D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F778E56-4BBA-445B-BB00-743B90284A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F778E56-4BBA-445B-BB00-743B90284A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F778E56-4BBA-445B-BB00-743B90284A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F778E56-4BBA-445B-BB00-743B90284A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

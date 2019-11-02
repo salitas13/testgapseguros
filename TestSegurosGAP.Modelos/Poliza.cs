@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSegurosGAP.AccesoDatos
+namespace TestSegurosGAP.Entidades
 {
     using System;
     using System.Collections.Generic;
@@ -23,9 +23,10 @@ namespace TestSegurosGAP.AccesoDatos
         public int IdTipoCubrimiento { get; set; }
         public int IdTipoRiesgo { get; set; }
         public int IdCliente { get; set; }
+        public short Cobertura { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual TipoCubrimiento TipoCubrimiento { get; set; }
         public virtual TipoRiesgo TipoRiesgo { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

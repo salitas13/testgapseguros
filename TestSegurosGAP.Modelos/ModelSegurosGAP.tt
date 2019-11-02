@@ -2,7 +2,7 @@
 <#@ include file="EF6.Utility.CS.ttinclude"#><#@ 
  output extension=".cs"#><#
 
-const string inputFile = @"ModelSegurosGAP.edmx";
+const string inputFile = @"..\TestSegurosGAP.AccesoDatos\EFProvider\DataContext\ModelSegurosGAP.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);

@@ -6,7 +6,7 @@
     using System.Reflection;
     using System.Xml.Linq;
 
-    public static class Genericos
+    public static class UtilidadesGenerico
     {
         public static string LeerMensaje(string codigo)
         {

@@ -41,9 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controladoras\ControladorClientes.cs" />
-    <Compile Include="Controladoras\ControladorPolizas.cs" />
+    <Compile Include="Controladoras\ControladoraCliente.cs" />
+    <Compile Include="Controladoras\ControladoraPoliza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestSegurosGAP.ModeloDatos\TestSegurosGAP.ModeloDatos.csproj">
+      <Project>{5F778E56-4BBA-445B-BB00-743B90284A13}</Project>
+      <Name>TestSegurosGAP.ModeloDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestSegurosGAP.Modelos\TestSegurosGAP.Entidades.csproj">
+      <Project>{93D9ECF0-E5E7-44E2-A429-72C57B9BCE45}</Project>
+      <Name>TestSegurosGAP.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestSegurosGAP.Utilidades\TestSegurosGAP.Utilidades.csproj">
+      <Project>{C9491BEF-9486-4AFD-BB55-C49131279B71}</Project>
+      <Name>TestSegurosGAP.Utilidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

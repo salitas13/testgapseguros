@@ -1,35 +1,30 @@
 ﻿namespace TestSegurosGAP.Servicios.Controllers
 {
-    using System.Collections.Generic;
-    using System.Web.Http;
-    using System.Web.Http.Cors;
-    using TestSegurosGAP.ModeloDatos;
-    using TestSegurosGAP.Entidades;
+    using System;
+    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Net;
-    using System;
-    using TestSegurosGAP.Utilidades;
+    using System.Web.Http;
+    using System.Web.Http.Cors;
+    using TestSegurosGAP.Entidades;
     using TestSegurosGAP.Entidades.Enumeradores;
     using TestSegurosGAP.Entidades.Excepciones;
+    using TestSegurosGAP.ModeloDatos;
     using TestSegurosGAP.Negocio.Controladoras;
+    using TestSegurosGAP.Utilidades;
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PolizaController : ApiController
+    public class ClienteController : ApiController
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        // GET api/Poliza
+        // GET api/Cliente
         public Task<HttpResponseMessage> Get()
         {
             try
             {
-                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerPolizas()));
-            }
-            catch (ExcepcionValidacion ex)
-            {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                ControladoraCliente ControladoraCliente = new ControladoraCliente(unitOfWork);
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ControladoraCliente.ObtenerClientes()));
             }
             catch (Exception)
             {
@@ -37,24 +32,20 @@
             }
         }
 
-        // GET api/Poliza/5
+        // GET api/Cliente/5
         public Task<HttpResponseMessage> Get(int id)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerPoliza(id)));
+                    ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraCliente.ObtenerCliente(id)));
                 }
                 else
                 {
                     return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
                 }
-            }
-            catch (ExcepcionValidacion ex)
-            {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
             }
             catch (Exception)
             {
@@ -62,24 +53,20 @@
             }
         }
 
-        // POST api/Poliza
-        public Task<HttpResponseMessage> Post([FromBody]Poliza poliza)
+        // POST api/Cliente
+        public Task<HttpResponseMessage> Post([FromBody]Cliente ciente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    controladoraPolizas.RegistrarPoliza(poliza);
+                    ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
+                    controladoraCliente.RegistrarCliente(ciente);
                 }
                 else
                 {
                     return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
                 }
-            }
-            catch (ExcepcionValidacion ex)
-            {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
             }
             catch (Exception)
             {
@@ -89,15 +76,15 @@
             return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
         }
 
-        // PUT api/Poliza/5
-        public Task<HttpResponseMessage> Put(int id, [FromBody]Poliza poliza)
+        // PUT api/Cliente/5
+        public Task<HttpResponseMessage> Put(int id, [FromBody]Cliente cliente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    controladoraPolizas.EditarPoliza(poliza);
+                    ControladoraCliente ControladoraCliente = new ControladoraCliente(unitOfWork);
+                    ControladoraCliente.EditarCliente(cliente);
                 }
                 else
                 {
@@ -116,15 +103,15 @@
             return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
         }
 
-        // DELETE api/Poliza/5
-        public Task<HttpResponseMessage> Delete(List<int> id)
+        // DELETE api/Cliente/5
+        public Task<HttpResponseMessage> Delete(int id)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    controladoraPolizas.EliminarPolizas(id);
+                    ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
+                    controladoraCliente.EliminarCliente(id);
                 }
                 else
                 {

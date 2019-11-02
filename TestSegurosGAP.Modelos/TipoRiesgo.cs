@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSegurosGAP.AccesoDatos
+namespace TestSegurosGAP.Entidades
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Cliente
+    public partial class TipoRiesgo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cliente()
+        public TipoRiesgo()
         {
             this.Poliza = new HashSet<Poliza>();
         }
     
-        public int IdCliente { get; set; }
-        public string NombresCliente { get; set; }
-        public string ApellidosCliente { get; set; }
-        public string FechaNacimiento { get; set; }
+        public int IdTipoRiesgo { get; set; }
+        public string Nombre { get; set; }
+        public short PorcentajeCoberturaMaxima { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Poliza> Poliza { get; set; }

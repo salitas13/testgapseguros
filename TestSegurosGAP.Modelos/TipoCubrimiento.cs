@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSegurosGAP.AccesoDatos
+namespace TestSegurosGAP.Entidades
 {
     using System;
     using System.Collections.Generic;
