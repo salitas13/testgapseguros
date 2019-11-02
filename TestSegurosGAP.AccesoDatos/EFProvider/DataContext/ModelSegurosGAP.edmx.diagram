@@ -10,7 +10,7 @@
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoCubrimiento" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TestSegurosGAPModel.TipoRiesgo" Width="1.5" PointX="0.75" PointY="7.875" />
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoRiesgo" />
-        <EntityTypeShape EntityType="TestSegurosGAPModel.Cliente" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="TestSegurosGAPModel.Cliente" Width="1.5" PointX="0.75" PointY="1.625" />
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_Cliente" />
       </Diagram>
     </edmx:Diagrams>

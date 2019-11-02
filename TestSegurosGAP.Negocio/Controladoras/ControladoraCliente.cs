@@ -50,6 +50,7 @@
         public void EliminarCliente(int id)
         {
             _unitOfWork.ClienteRepository.Delete(id);
+            _unitOfWork.Save();
         }
     }
 }

@@ -21,9 +21,10 @@ namespace TestSegurosGAP.Entidades
         }
     
         public int IdCliente { get; set; }
-        public string NombresCliente { get; set; }
-        public string ApellidosCliente { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
         public System.DateTime FechaNacimiento { get; set; }
+        public string Cedula { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Poliza> Poliza { get; set; }

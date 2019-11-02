@@ -76,6 +76,8 @@
             {
                 _unitOfWork.PolizasRepository.Delete(id);
             }
+
+            _unitOfWork.Save();
         }
     }
 }

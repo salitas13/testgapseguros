@@ -13,6 +13,10 @@
     using TestSegurosGAP.Negocio.Controladoras;
     using TestSegurosGAP.Utilidades;
 
+    /// <summary>
+    /// customer controller class for testing security token
+    /// </summary>
+    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ClienteController : ApiController
     {

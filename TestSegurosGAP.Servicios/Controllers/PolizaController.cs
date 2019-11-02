@@ -14,6 +14,10 @@
     using TestSegurosGAP.Entidades.Excepciones;
     using TestSegurosGAP.Negocio.Controladoras;
 
+    /// <summary>
+    /// customer controller class for testing security token
+    /// </summary>
+    [Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PolizaController : ApiController
     {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using TestSegurosGAP.Servicios.Controllers;
 
 namespace TestSegurosGAP.Servicios
 {
@@ -15,6 +13,8 @@ namespace TestSegurosGAP.Servicios
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
+
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

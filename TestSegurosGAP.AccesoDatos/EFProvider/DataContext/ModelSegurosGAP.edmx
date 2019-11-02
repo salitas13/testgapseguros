@@ -10,9 +10,10 @@
             <PropertyRef Name="IdCliente" />
           </Key>
           <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombresCliente" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="ApellidosCliente" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Cedula" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Poliza">
           <Key>
@@ -184,9 +185,10 @@
             <PropertyRef Name="IdCliente" />
           </Key>
           <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombresCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="ApellidosCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Poliza" Relationship="TestSegurosGAPModel.FK_Poliza_Cliente" FromRole="Cliente" ToRole="Poliza" />
         </EntityType>
         <Association Name="FK_Poliza_Cliente">
@@ -243,9 +245,10 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="TestSegurosGAPModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="ApellidosCliente" ColumnName="ApellidosCliente" />
-                <ScalarProperty Name="NombresCliente" ColumnName="NombresCliente" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
               </MappingFragment>
             </EntityTypeMapping>
