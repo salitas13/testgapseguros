@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mensajes>
+  <mensaje codigo="ErrorGenerico">Debido a que la linea de riesgo es Alto, el porcentaje de cubrimiento no puede ser superior al 50%.</mensaje>
+</mensajes>
