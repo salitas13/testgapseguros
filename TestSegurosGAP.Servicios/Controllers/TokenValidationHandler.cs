@@ -34,6 +34,11 @@
             HttpStatusCode statusCode;
             string token;
 
+            if (request.Method == HttpMethod.Options)
+            {
+                return base.SendAsync(request, cancellationToken);
+            }
+
             // determine whether a jwt exists or not
             if (!TryRetrieveToken(request, out token))
             {

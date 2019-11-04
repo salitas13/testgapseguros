@@ -1,6 +1,7 @@
 ﻿namespace TestSegurosGAP.Servicios.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -9,6 +10,7 @@
     using TestSegurosGAP.Entidades;
     using TestSegurosGAP.Entidades.Enumeradores;
     using TestSegurosGAP.Entidades.Excepciones;
+    using TestSegurosGAP.Entidades.Respuestas;
     using TestSegurosGAP.ModeloDatos;
     using TestSegurosGAP.Negocio.Controladoras;
     using TestSegurosGAP.Utilidades;
@@ -28,7 +30,14 @@
             try
             {
                 ControladoraCliente ControladoraCliente = new ControladoraCliente(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ControladoraCliente.ObtenerClientes()));
+
+                List<Cliente> clientes = ControladoraCliente.ObtenerClientes();
+
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<Cliente>>
+                {
+                    result = clientes,
+                    status = (int)HttpStatusCode.OK
+                }));
             }
             catch (Exception)
             {
@@ -44,16 +53,40 @@
                 if (ModelState.IsValid)
                 {
                     ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraCliente.ObtenerCliente(id)));
+
+                    var cliente = controladoraCliente.ObtenerCliente(id);
+
+                    RespuestaCliente respuesta = new RespuestaCliente
+                    {
+                        IdCliente = cliente.IdCliente,
+                        Nombres = cliente.Nombres,
+                        Apellidos = cliente.Apellidos,
+                        FechaNacimiento =cliente.FechaNacimiento,
+                        Cedula = cliente.Cedula
+                    };
+
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<RespuestaCliente>
+                    {
+                        result = respuesta,
+                        status = (int)HttpStatusCode.OK
+                    }));
                 }
                 else
                 {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+                    {
+                        message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
+                        status = (int)HttpStatusCode.BadRequest
+                    }));
                 }
             }
             catch (Exception)
             {
-                return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+                {
+                    message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
+                    status = (int)HttpStatusCode.InternalServerError
+                }));
             }
         }
 
@@ -62,22 +95,22 @@
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
-                    controladoraCliente.RegistrarCliente(ciente);
-                }
-                else
-                {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
-                }
+                ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
+                controladoraCliente.RegistrarCliente(ciente);
             }
             catch (Exception)
             {
-                return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.InternalServerError, new Respuesta<string>
+                {
+                    message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
+                    status = (int)HttpStatusCode.OK
+                }));
             }
 
-            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
+            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+            {
+                status = (int)HttpStatusCode.OK
+            }));
         }
 
         // PUT api/Cliente/5
@@ -92,19 +125,34 @@
                 }
                 else
                 {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, new Respuesta<string>
+                    {
+                        message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
+                        status = (int)HttpStatusCode.BadRequest
+                    }));
                 }
             }
             catch (ExcepcionValidacion ex)
             {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+                {
+                    message = ex.Message,
+                    status = (int)HttpStatusCode.BadRequest
+                }));
             }
             catch (Exception)
             {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.InternalServerError, new Respuesta<string>
+                {
+                    message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
+                    status = (int)HttpStatusCode.InternalServerError
+                }));
             }
 
-            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
+            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+            {
+                status = (int)HttpStatusCode.OK
+            }));
         }
 
         // DELETE api/Cliente/5

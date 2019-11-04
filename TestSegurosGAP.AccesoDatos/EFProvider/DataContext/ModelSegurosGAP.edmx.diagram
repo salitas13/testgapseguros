@@ -6,12 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="459b25aa8fd74ecd89d3b7adba527f05" Name="Diagram1">
         <EntityTypeShape EntityType="TestSegurosGAPModel.Poliza" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestSegurosGAPModel.TipoCubrimiento" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoCubrimiento" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TestSegurosGAPModel.TipoRiesgo" Width="1.5" PointX="0.75" PointY="7.875" />
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoRiesgo" />
         <EntityTypeShape EntityType="TestSegurosGAPModel.Cliente" Width="1.5" PointX="0.75" PointY="1.625" />
         <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_Cliente" />
+        <EntityTypeShape EntityType="TestSegurosGAPModel.Usuario" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TestSegurosGAPModel.TipoCubrimiento" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="TestSegurosGAPModel.FK_Poliza_TipoCubrimiento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

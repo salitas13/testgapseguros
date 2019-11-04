@@ -115,12 +115,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TestSegurosGAP\TestSegurosGAP.vbproj">
-      <Project>{43A66597-13F8-4B69-B7E9-9278B2DD7258}</Project>
-      <Name>TestSegurosGAP</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

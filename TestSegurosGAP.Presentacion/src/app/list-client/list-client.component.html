@@ -1,0 +1,26 @@
+<div class="col-md-6 user-container">
+  <h2 style="margin: auto"> Detalles cliente</h2>
+  <button class="btn btn-danger" style="width:200px" (click)="addClient()"> Adicionar Cliente</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="hidden">Id</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Cedula</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let client of clients">
+      <td class="hidden">{{client.IdCliente}}</td>
+      <td>{{client.Nombres}}</td>
+      <td>{{client.Apellidos}}</td>
+      <td>{{client.FechaNacimiento}}</td>
+      <td>{{client.Cedula}}</td>
+      <td><button class="btn btn-success" (click)="viewInsurancesClient(client)"> Ver pólizas</button>
+        <button class="btn btn-success" (click)="editClient(client)" style="margin-left: 20px;"> Editar</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

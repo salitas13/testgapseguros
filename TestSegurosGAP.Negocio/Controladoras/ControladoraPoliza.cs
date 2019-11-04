@@ -38,6 +38,11 @@
             return _unitOfWork.PolizasRepository.Find(id);
         }
 
+        public List<Poliza> ObtenerPolizasCliente(int id)
+        {
+            return _unitOfWork.PolizasRepository.Find(t => t.IdCliente == id).ToList();
+        }
+
         public void RegistrarPoliza(Poliza poliza)
         {
             // Obtengo el Tipo de giesgo y valido el máximo porcentaje de cobertura
@@ -78,6 +83,24 @@
             }
 
             _unitOfWork.Save();
+        }
+
+        /// <summary>
+        /// Obtengo la lista de tipo de riesgo
+        /// </summary>
+        /// <returns>Lista de tipos de riesgo</returns>
+        public List<TipoRiesgo> ObtenerTiposRiesgo()
+        {
+            return _unitOfWork.TipoRiesgoRepository.GetAll().ToList();
+        }
+
+        /// <summary>
+        /// Obtengo la lista de tipo de cubrimiento
+        /// </summary>
+        /// <returns>Lista de tipos de cubrimiento</returns>
+        public List<TipoCubrimiento> ObtenerTiposCubrimiento()
+        {
+            return _unitOfWork.TipoCubrimientoRepository.GetAll().ToList();
         }
     }
 }

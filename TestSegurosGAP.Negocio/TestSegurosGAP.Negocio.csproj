@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Controladoras\ControladoraCliente.cs" />
     <Compile Include="Controladoras\ControladoraPoliza.cs" />
+    <Compile Include="Controladoras\ControladoraUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace TestSegurosGAP.Entidades
         }
     
         public int IdTipoCubrimiento { get; set; }
-        public string NombreTipoCubrimiento { get; set; }
+        public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Poliza> Poliza { get; set; }

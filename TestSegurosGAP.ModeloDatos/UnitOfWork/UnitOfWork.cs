@@ -15,6 +15,7 @@
         private GenericRepository<Poliza> polizaRepository;
         private GenericRepository<TipoCubrimiento> tipoCubrimientoRepository;
         private GenericRepository<TipoRiesgo> tipoRiesgoRepository;
+        private GenericRepository<Usuario> usuarioRepository;
 
         #endregion Repositories
 
@@ -73,6 +74,19 @@
                 }
 
                 return tipoRiesgoRepository;
+            }
+        }
+
+        public GenericRepository<Usuario> UsuarioRepository
+        {
+            get
+            {
+                if (this.usuarioRepository == null)
+                {
+                    this.usuarioRepository = new GenericRepository<Usuario>(context);
+                }
+
+                return usuarioRepository;
             }
         }
 

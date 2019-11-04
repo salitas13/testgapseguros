@@ -13,6 +13,7 @@
     using TestSegurosGAP.Entidades.Enumeradores;
     using TestSegurosGAP.Entidades.Excepciones;
     using TestSegurosGAP.Negocio.Controladoras;
+    using TestSegurosGAP.Entidades.Respuestas;
 
     /// <summary>
     /// customer controller class for testing security token
@@ -50,6 +51,37 @@
                 {
                     ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
                     return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerPoliza(id)));
+                }
+                else
+                {
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+                }
+            }
+            catch (ExcepcionValidacion ex)
+            {
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+            }
+            catch (Exception)
+            {
+                return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+            }
+        }
+
+        // GET api/Poliza/5
+        [HttpGet]
+        [ActionName("polizascliente")]
+        public Task<HttpResponseMessage> PolizasCliente(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
+                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<Poliza>>
+                    {
+                        result = controladoraPolizas.ObtenerPolizasCliente(id),
+                        status = (int)HttpStatusCode.OK
+                    }));
                 }
                 else
                 {
@@ -145,6 +177,25 @@
             }
 
             return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
+        }
+
+        [HttpGet]
+        [ActionName("tiposriesgo")]
+        public Task<HttpResponseMessage> TiposRiesgo()
+        {
+            try
+            {
+                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerTiposRiesgo()));
+            }
+            catch (ExcepcionValidacion ex)
+            {
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+            }
+            catch (Exception)
+            {
+                return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
+            }
         }
 
         protected override void Dispose(bool disposing)

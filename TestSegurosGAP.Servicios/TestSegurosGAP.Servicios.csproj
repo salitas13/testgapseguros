@@ -184,6 +184,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PolizaController.cs" />
+    <Compile Include="Controllers\TipoCubrimientoController.cs" />
+    <Compile Include="Controllers\TipoRiesgoController.cs" />
     <Compile Include="Controllers\TokenGenerator.cs" />
     <Compile Include="Controllers\TokenValidationHandler.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

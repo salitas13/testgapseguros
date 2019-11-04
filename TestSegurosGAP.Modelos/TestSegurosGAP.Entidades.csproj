@@ -62,11 +62,16 @@
       <DependentUpon>ModelSegurosGAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respuestas\Respuesta.cs" />
+    <Compile Include="Respuestas\RespuestaCliente.cs" />
     <Compile Include="Solicitudes\LoginRequest.cs" />
     <Compile Include="TipoCubrimiento.cs">
       <DependentUpon>ModelSegurosGAP.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoRiesgo.cs">
+      <DependentUpon>ModelSegurosGAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
       <DependentUpon>ModelSegurosGAP.tt</DependentUpon>
     </Compile>
   </ItemGroup>

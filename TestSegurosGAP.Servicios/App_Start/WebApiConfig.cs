@@ -16,6 +16,15 @@ namespace TestSegurosGAP.Servicios
 
             config.MessageHandlers.Add(new TokenValidationHandler());
 
+            config.EnableCors();
+
+            // Map this rule first
+
+            config.Routes.MapHttpRoute(
+                 "WithActionApi",
+                 "api/{controller}/{action}/{id}"
+             );
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
