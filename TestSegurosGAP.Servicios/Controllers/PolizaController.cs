@@ -43,13 +43,18 @@
         }
 
         [HttpGet]
-        [ActionName("polizasbyid")]
-        public Task<HttpResponseMessage> PolizabById(int id)
+        [ActionName("polizabyid")]
+        public Task<HttpResponseMessage> PolizaById(int id)
         {
             try
             {
                 ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, controladoraPolizas.ObtenerPoliza(id)));
+
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<RespuestaPoliza>
+                {
+                    result = controladoraPolizas.ObtenerPoliza(id),
+                    status = (int)HttpStatusCode.OK
+                }));
             }
             catch (ExcepcionValidacion ex)
             {
@@ -131,7 +136,11 @@
             }
             catch (ExcepcionValidacion ex)
             {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+                {
+                    message = ex.Message,
+                    status = (int)HttpStatusCode.BadRequest
+                }));
             }
             catch (Exception ex)
             {

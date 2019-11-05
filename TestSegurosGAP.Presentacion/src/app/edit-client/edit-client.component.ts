@@ -34,7 +34,8 @@ export class EditClientComponent implements OnInit {
 
     this.apiService.getClientById(+clientId)
       .subscribe( data => {
-        this.editForm.setValue(data.result);
+          this.editForm.setValue(data.result);
+          this.editForm.get('FechaNacimiento').setValue(this.editForm.get('FechaNacimiento').value.slice(0, 10));
       });
   }
 
@@ -44,7 +45,7 @@ export class EditClientComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status === 200) {
-            alert('Cliente actualizado satisfatoriamente.');
+            alert('Cliente actualizado satisfactoriamente.');
             this.router.navigate(['list-client']);
           }else {
             alert(data.message);

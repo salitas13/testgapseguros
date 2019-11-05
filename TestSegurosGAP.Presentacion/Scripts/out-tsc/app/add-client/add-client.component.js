@@ -33,7 +33,7 @@ var AddClientComponent = /** @class */ (function () {
         this.apiService.createClient(this.addForm.value)
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Cliente creado satisfatoriamente.');
+                alert('Cliente creado satisfactoriamente.');
                 _this.router.navigate(['list-client']);
             }
             else {

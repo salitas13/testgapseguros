@@ -49,9 +49,24 @@
             }).ToList();
         }
 
-        public Poliza ObtenerPoliza(int id)
+        public RespuestaPoliza ObtenerPoliza(int id)
         {
-            return _unitOfWork.PolizasRepository.Find(id);
+            var poliza = _unitOfWork.PolizasRepository.Find(id);
+
+            return  new RespuestaPoliza
+            {
+                IdCliente = poliza.IdCliente,
+                IdPoliza = poliza.IdPoliza,
+                Cobertura = poliza.Cobertura,
+                Descripcion = poliza.Descripcion,
+                FechaInicioVigencia = poliza.FechaInicioVigencia,
+                IdTipoCubrimiento = poliza.IdTipoCubrimiento,
+                IdTipoRiesgo = poliza.IdTipoRiesgo,
+                Nombre = poliza.Nombre,
+                PeriodoCobertura = poliza.PeriodoCobertura,
+                PrecioPoliza = poliza.PrecioPoliza,
+                Estado = poliza.Estado
+            };
         }
 
         public List<RespuestaPoliza> ObtenerPolizasCliente(int id)
@@ -115,8 +130,9 @@
                 throw new ExcepcionValidacion(UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorRiesgoAlto.ToString()));
             }
 
-            var polizaUpdate = this.ObtenerPoliza(poliza.IdPoliza);
+            var polizaUpdate = _unitOfWork.PolizasRepository.Find(poliza.IdPoliza);
 
+            // Actualizo la información de la poliza
             polizaUpdate.Cobertura = poliza.Cobertura;
             polizaUpdate.Descripcion = poliza.Descripcion;
             polizaUpdate.Estado = poliza.Estado;

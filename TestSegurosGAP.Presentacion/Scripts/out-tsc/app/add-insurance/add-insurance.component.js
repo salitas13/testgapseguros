@@ -104,12 +104,12 @@ var AddInsuranceComponent = /** @class */ (function () {
         this.apiService.createInsurance(this.addForm.value)
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Poliza creada satisfatoriamente.');
+                alert('Poliza creada satisfactoriamente.');
                 _this.router.navigate(['list-insurance']);
             }
             else {
                 // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
-                alert(data.message);
+                alert('El porcentaje de cubrimiento no puede ser superior al 50%');
             }
         });
     };

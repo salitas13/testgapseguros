@@ -78,7 +78,7 @@ export class ListInsuranceComponent implements OnInit {
             .subscribe(
                 data => {
                     if (data.status === 200) {
-                        alert('Póliza cancelada satisfatoriamente.');
+                        alert('Póliza cancelada satisfactoriamente.');
                         this.updateList();
                     } else {
                         alert(data.message);

@@ -51,7 +51,7 @@ export class ApiService {
     }
 
     getInsuranceById(id: number): Observable<ApiResponse> {
-        return this.http.get<ApiResponse>(this.baseUrlInsurances + 'polizasbyid/' + id);
+        return this.http.get<ApiResponse>(this.baseUrlInsurances + 'polizabyid/' + id);
     }
 
     getTypesRisk(): Observable<ApiResponse> {

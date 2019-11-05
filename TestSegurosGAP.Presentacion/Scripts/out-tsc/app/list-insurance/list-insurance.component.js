@@ -74,7 +74,7 @@ var ListInsuranceComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza cancelada satisfatoriamente.');
+                alert('P�liza cancelada satisfactoriamente.');
                 _this.updateList();
             }
             else {

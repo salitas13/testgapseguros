@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Insurance } from '../model/insurance.model';
 import { TypeCovering } from '../model/typecovering.model';
 import { TypeRisk } from '../model/typerisk.model';
+import { Client } from '../model/client.model';
 
 @Component({
   selector: 'app-edit-client',
@@ -36,7 +37,10 @@ export class EditInsuranceComponent implements OnInit {
             PrecioPoliza: [null, Validators.required],
             IdTipoCubrimiento: [null, Validators.required],
             IdTipoRiesgo: [null, Validators.required],
-            Cobertura: [null, Validators.required]
+            Cobertura: [null, Validators.required],
+            Estado: [],
+            TipoRiesgo: [],
+            TipoCubrimiento: []
         });
 
       this.sub = this.activatedRoute.queryParamMap.subscribe(params => {
@@ -55,6 +59,8 @@ export class EditInsuranceComponent implements OnInit {
                   this.apiService.getInsuranceById(+this.insuranceId)
                       .subscribe(data => {
                           this.editForm.setValue(data.result);
+                          this.editForm.get('FechaInicioVigencia').setValue(this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                          console.log(this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                       });
 
               },
@@ -87,6 +93,8 @@ export class EditInsuranceComponent implements OnInit {
                   this.apiService.getInsuranceById(+this.insuranceId)
                       .subscribe(data => {
                           this.editForm.setValue(data.result);
+                          this.editForm.get('FechaInicioVigencia').setValue(this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                          console.log(this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                       });
 
               },
@@ -123,10 +131,10 @@ export class EditInsuranceComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status === 200) {
-            alert('Póliza actualizado satisfatoriamente.');
-            this.router.navigate(['list-insurance']);
+            alert('Póliza actualizada satisfactoriamente.');
+              this.router.navigate(['list-insurance'], { queryParams: { clientId: (this.editForm.value as Client).IdCliente.toString() } });
           }else {
-            alert(data.message);
+              alert('El porcentaje de cubrimiento no puede ser superior al 50% ya que el riesgo es Alto');
           }
         },
         error => {

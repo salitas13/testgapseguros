@@ -39,6 +39,7 @@ var EditClientComponent = /** @class */ (function () {
         this.apiService.getClientById(+clientId)
             .subscribe(function (data) {
             _this.editForm.setValue(data.result);
+            _this.editForm.get('FechaNacimiento').setValue(_this.editForm.get('FechaNacimiento').value.slice(0, 10));
         });
     };
     EditClientComponent.prototype.onSubmit = function () {
@@ -47,7 +48,7 @@ var EditClientComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Cliente actualizado satisfatoriamente.');
+                alert('Cliente actualizado satisfactoriamente.');
                 _this.router.navigate(['list-client']);
             }
             else {

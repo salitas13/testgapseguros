@@ -34,7 +34,10 @@ var EditInsuranceComponent = /** @class */ (function () {
             PrecioPoliza: [null, forms_1.Validators.required],
             IdTipoCubrimiento: [null, forms_1.Validators.required],
             IdTipoRiesgo: [null, forms_1.Validators.required],
-            Cobertura: [null, forms_1.Validators.required]
+            Cobertura: [null, forms_1.Validators.required],
+            Estado: [],
+            TipoRiesgo: [],
+            TipoCubrimiento: []
         });
         this.sub = this.activatedRoute.queryParamMap.subscribe(function (params) {
             _this.insuranceId = params.get("insuranceId");
@@ -49,6 +52,8 @@ var EditInsuranceComponent = /** @class */ (function () {
                 _this.apiService.getInsuranceById(+_this.insuranceId)
                     .subscribe(function (data) {
                     _this.editForm.setValue(data.result);
+                    _this.editForm.get('FechaInicioVigencia').setValue(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                    console.log(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                 });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
@@ -77,6 +82,8 @@ var EditInsuranceComponent = /** @class */ (function () {
                 _this.apiService.getInsuranceById(+_this.insuranceId)
                     .subscribe(function (data) {
                     _this.editForm.setValue(data.result);
+                    _this.editForm.get('FechaInicioVigencia').setValue(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                    console.log(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                 });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
@@ -110,8 +117,8 @@ var EditInsuranceComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza actualizado satisfatoriamente.');
-                _this.router.navigate(['list-insurance']);
+                alert('P�liza actualizada satisfactoriamente.');
+                _this.router.navigate(['list-insurance'], { queryParams: { clientId: _this.editForm.value.IdCliente.toString() } });
             }
             else {
                 alert(data.message);

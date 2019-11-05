@@ -110,7 +110,7 @@ export class AddInsuranceComponent implements OnInit {
         this.apiService.createInsurance(this.addForm.value)
             .subscribe(data => {
                 if (data.status === 200) {
-                    alert('Poliza creada satisfatoriamente.');
+                    alert('Poliza creada satisfactoriamente.');
                     this.router.navigate(['list-insurance']);
                 } else {
                     // Error en la validación de la cobertura de la poliza mostrar mensaje al cliente

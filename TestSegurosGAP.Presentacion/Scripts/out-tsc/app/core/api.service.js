@@ -47,7 +47,7 @@ var ApiService = /** @class */ (function () {
         return this.http.put(this.baseUrlInsurances + insurance.IdPoliza, insurance);
     };
     ApiService.prototype.getInsuranceById = function (id) {
-        return this.http.get(this.baseUrlInsurances + 'polizasbyid/' + id);
+        return this.http.get(this.baseUrlInsurances + 'polizabyid/' + id);
     };
     ApiService.prototype.getTypesRisk = function () {
         return this.http.get(this.baseUrlTypeRisk);

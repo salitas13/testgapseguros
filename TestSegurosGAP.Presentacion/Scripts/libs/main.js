@@ -88,11 +88,12 @@ var AddClientComponent = /** @class */ (function () {
         this.apiService.createClient(this.addForm.value)
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Cliente creado satisfatoriamente.');
+                alert('Cliente creado satisfactoriamente.');
                 _this.router.navigate(['list-client']);
             }
             else {
-                alert(data.message);
+                // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
+                alert('El porcentaje de cubrimiento no puede ser superior al 50%');
             }
         });
     };
@@ -247,12 +248,12 @@ var AddInsuranceComponent = /** @class */ (function () {
         this.apiService.createInsurance(this.addForm.value)
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Poliza creada satisfatoriamente.');
+                alert('Poliza creada satisfactoriamente.');
                 _this.router.navigate(['list-insurance']);
             }
             else {
                 // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
-                alert(data.message);
+                alert('El porcentaje de cubrimiento no puede ser superior al 50%');
             }
         });
     };
@@ -473,7 +474,7 @@ var ApiService = /** @class */ (function () {
         return this.http.put(this.baseUrlInsurances + insurance.IdPoliza, insurance);
     };
     ApiService.prototype.getInsuranceById = function (id) {
-        return this.http.get(this.baseUrlInsurances + 'polizasbyid/' + id);
+        return this.http.get(this.baseUrlInsurances + 'polizabyid/' + id);
     };
     ApiService.prototype.getTypesRisk = function () {
         return this.http.get(this.baseUrlTypeRisk);
@@ -605,6 +606,7 @@ var EditClientComponent = /** @class */ (function () {
         this.apiService.getClientById(+clientId)
             .subscribe(function (data) {
             _this.editForm.setValue(data.result);
+            _this.editForm.get('FechaNacimiento').setValue(_this.editForm.get('FechaNacimiento').value.slice(0, 10));
         });
     };
     EditClientComponent.prototype.onSubmit = function () {
@@ -613,7 +615,7 @@ var EditClientComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Cliente actualizado satisfatoriamente.');
+                alert('Cliente actualizado satisfactoriamente.');
                 _this.router.navigate(['list-client']);
             }
             else {
@@ -674,7 +676,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Editar P�liza</h2>\n  <form [formGroup]=\"editForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"hidden\">\r\n          <input type=\"text\" formControlName=\"IdPoliza\" placeholder=\"IdPoliza\" name=\"IdPoliza\" class=\"form-control\" id=\"IdPoliza\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"Nombre\">Nombre:</label>\r\n          <input type=\"text\" maxlength=\"50\" formControlName=\"Nombre\" placeholder=\"Nombre\" name=\"Nombre\" class=\"form-control\" id=\"Nombre\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Descripcion\">Descripci�n:</label>\r\n          <input type=\"text\" maxlength=\"200\" formControlName=\"Descripcion\" placeholder=\"Descripcion\" name=\"Descripcion\" class=\"form-control\" id=\"Descripcion\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"FechaInicioVigencia\">Fecha de nacimiento:</label>\r\n          <input type=\"date\" formControlName=\"FechaInicioVigencia\" placeholder=\"Fecha inicio vigencia\" name=\"FechaInicioVigencia\" class=\"form-control\" id=\"FechaInicioVigencia\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PeriodoCobertura\">Per�odo de cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"PeriodoCobertura\" placeholder=\"Per�odo de cobertura\" name=\"PeriodoCobertura\" class=\"form-control\" id=\"PeriodoCobertura\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PrecioPoliza\">Precio p�liza:</label>\r\n          <input type=\"number\" maxlength=\"7\" formControlName=\"PrecioPoliza\" placeholder=\"Precio p�liza\" name=\"PrecioPoliza\" class=\"form-control\" id=\"PrecioPoliza\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"typecovering\">Tipo covertura:</label>\r\n          <select formControlName=\"IdTipoCubrimiento\" id=\"IdTipoCubrimiento\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let tytypepecovering of typescovering; let i = index\" [value]=\"typescovering[i].IdTipoCubrimiento\">\r\n                  {{typescovering[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"typerisk\">Tipo riesgo:</label>\r\n          <select formControlName=\"IdTipoRiesgo\" id=\"IdTipoRiesgo\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let type of typesrisk; let i = index\" [value]=\"typesrisk[i].IdTipoRiesgo\">\r\n                  {{typesrisk[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Cobertura\">Cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"Cobertura\" placeholder=\"Cobertura\" name=\"Cobertura\" class=\"form-control\" id=\"Cobertura\">\r\n      </div>\r\n\r\n      <button class=\"btn btn-success\">Crear</button>\r\n  </form>\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Editar P�liza</h2>\n  <form [formGroup]=\"editForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"hidden\">\r\n          <input type=\"text\" formControlName=\"IdPoliza\" placeholder=\"IdPoliza\" name=\"IdPoliza\" class=\"form-control\" id=\"IdPoliza\">\r\n      </div>\r\n      <div class=\"hidden\">\r\n          <input type=\"text\" formControlName=\"Estado\" placeholder=\"Estado\" name=\"Estado\" class=\"form-control\" id=\"Estado\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"Nombre\">Nombre:</label>\r\n          <input type=\"text\" maxlength=\"50\" formControlName=\"Nombre\" placeholder=\"Nombre\" name=\"Nombre\" class=\"form-control\" id=\"Nombre\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Descripcion\">Descripci�n:</label>\r\n          <input type=\"text\" maxlength=\"200\" formControlName=\"Descripcion\" placeholder=\"Descripcion\" name=\"Descripcion\" class=\"form-control\" id=\"Descripcion\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"FechaInicioVigencia\">Fecha de nacimiento:</label>\r\n          <input type=\"date\" formControlName=\"FechaInicioVigencia\" placeholder=\"Fecha inicio vigencia\" name=\"FechaInicioVigencia\" class=\"form-control\" id=\"FechaInicioVigencia\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PeriodoCobertura\">Per�odo de cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"PeriodoCobertura\" placeholder=\"Per�odo de cobertura\" name=\"PeriodoCobertura\" class=\"form-control\" id=\"PeriodoCobertura\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PrecioPoliza\">Precio p�liza:</label>\r\n          <input type=\"number\" maxlength=\"7\" formControlName=\"PrecioPoliza\" placeholder=\"Precio p�liza\" name=\"PrecioPoliza\" class=\"form-control\" id=\"PrecioPoliza\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"typecovering\">Tipo covertura:</label>\r\n          <select formControlName=\"IdTipoCubrimiento\" id=\"IdTipoCubrimiento\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let tytypepecovering of typescovering; let i = index\" [value]=\"typescovering[i].IdTipoCubrimiento\">\r\n                  {{typescovering[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"typerisk\">Tipo riesgo:</label>\r\n          <select formControlName=\"IdTipoRiesgo\" id=\"IdTipoRiesgo\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let type of typesrisk; let i = index\" [value]=\"typesrisk[i].IdTipoRiesgo\">\r\n                  {{typesrisk[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Cobertura\">Cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"Cobertura\" placeholder=\"Cobertura\" name=\"Cobertura\" class=\"form-control\" id=\"Cobertura\">\r\n      </div>\r\n\r\n      <button class=\"btn btn-success\">Actualizar</button>\r\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -722,7 +724,10 @@ var EditInsuranceComponent = /** @class */ (function () {
             PrecioPoliza: [null, forms_1.Validators.required],
             IdTipoCubrimiento: [null, forms_1.Validators.required],
             IdTipoRiesgo: [null, forms_1.Validators.required],
-            Cobertura: [null, forms_1.Validators.required]
+            Cobertura: [null, forms_1.Validators.required],
+            Estado: [],
+            TipoRiesgo: [],
+            TipoCubrimiento: []
         });
         this.sub = this.activatedRoute.queryParamMap.subscribe(function (params) {
             _this.insuranceId = params.get("insuranceId");
@@ -737,6 +742,8 @@ var EditInsuranceComponent = /** @class */ (function () {
                 _this.apiService.getInsuranceById(+_this.insuranceId)
                     .subscribe(function (data) {
                     _this.editForm.setValue(data.result);
+                    _this.editForm.get('FechaInicioVigencia').setValue(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                    console.log(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                 });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
@@ -765,6 +772,8 @@ var EditInsuranceComponent = /** @class */ (function () {
                 _this.apiService.getInsuranceById(+_this.insuranceId)
                     .subscribe(function (data) {
                     _this.editForm.setValue(data.result);
+                    _this.editForm.get('FechaInicioVigencia').setValue(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
+                    console.log(_this.editForm.get('FechaInicioVigencia').value.slice(0, 10));
                 });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
@@ -798,11 +807,11 @@ var EditInsuranceComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza actualizado satisfatoriamente.');
-                _this.router.navigate(['list-insurance']);
+                alert('P�liza actualizada satisfactoriamente.');
+                _this.router.navigate(['list-insurance'], { queryParams: { clientId: _this.editForm.value.IdCliente.toString() } });
             }
             else {
-                alert(data.message);
+                alert('El porcentaje de cubrimiento no puede ser superior al 50% ya que el riesgo es Alto');
             }
         }, function (error) {
             if (error instanceof http_1.HttpErrorResponse) {
@@ -1056,7 +1065,7 @@ var ListInsuranceComponent = /** @class */ (function () {
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza cancelada satisfatoriamente.');
+                alert('P�liza cancelada satisfactoriamente.');
                 _this.updateList();
             }
             else {

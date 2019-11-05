@@ -29,10 +29,11 @@ export class AddClientComponent implements OnInit {
     this.apiService.createClient(this.addForm.value)
       .subscribe( data => {
           if (data.status === 200) {
-              alert('Cliente creado satisfatoriamente.');
+              alert('Cliente creado satisfactoriamente.');
               this.router.navigate(['list-client']);
           } else {
-              alert(data.message);
+              // Error en la validación de la cobertura de la poliza mostrar mensaje al cliente
+              alert('El porcentaje de cubrimiento no puede ser superior al 50% ya que el riesgo es Alto');
           }
       });
   }
