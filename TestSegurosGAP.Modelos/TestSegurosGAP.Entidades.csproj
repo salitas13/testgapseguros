@@ -64,6 +64,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respuestas\Respuesta.cs" />
     <Compile Include="Respuestas\RespuestaCliente.cs" />
+    <Compile Include="Respuestas\RespuestaPoliza.cs" />
+    <Compile Include="Respuestas\RespuestaTipoCubrimiento.cs" />
+    <Compile Include="Respuestas\RespuestaTipoRiesgo.cs" />
     <Compile Include="Solicitudes\LoginRequest.cs" />
     <Compile Include="TipoCubrimiento.cs">
       <DependentUpon>ModelSegurosGAP.tt</DependentUpon>

@@ -166,6 +166,8 @@
     <Content Include="src\app\add-insurance\add-insurance.component.css" />
     <Content Include="src\app\add-insurance\add-insurance.component.html" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\edit-insurance\edit-insurance.component.css" />
+    <Content Include="src\app\edit-insurance\edit-insurance.component.html" />
     <Content Include="src\app\edit-client\edit-client.component.css" />
     <Content Include="src\app\edit-client\edit-client.component.html" />
     <Content Include="src\app\list-client\list-client.component.css" />
@@ -233,6 +235,8 @@
     <TypeScriptCompile Include="src\app\app.routing.ts" />
     <TypeScriptCompile Include="src\app\core\api.service.ts" />
     <TypeScriptCompile Include="src\app\core\interceptor.ts" />
+    <TypeScriptCompile Include="src\app\edit-insurance\edit-insurance.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\edit-insurance\edit-insurance.component.ts" />
     <TypeScriptCompile Include="src\app\edit-client\edit-client.component.spec.ts" />
     <TypeScriptCompile Include="src\app\edit-client\edit-client.component.ts" />
     <TypeScriptCompile Include="src\app\list-client\list-client.component.spec.ts" />

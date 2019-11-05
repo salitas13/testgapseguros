@@ -8,7 +8,7 @@ import { EditClientComponent } from './edit-client/edit-client.component';
 import { ListClientComponent } from './list-client/list-client.component';
 import { ListInsuranceComponent } from './list-insurance/list-insurance.component'; 
 import { AddInsuranceComponent } from './add-insurance/add-insurance.component'; 
-//import { EditInsuranceComponent } from './edit-insurance/add-insurance.component'; 
+import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component'; 
 import { ApiService } from "./core/api.service";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -24,7 +24,7 @@ import { TokenInterceptor } from "./core/interceptor";
         ListClientComponent,
         ListInsuranceComponent,
         AddInsuranceComponent,
-        //EditInsuranceComponent 
+        EditInsuranceComponent 
     ],
     imports: [
         BrowserModule,

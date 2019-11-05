@@ -30,7 +30,7 @@
             try
             {
                 ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerPolizas()));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, controladoraPolizas.ObtenerPolizas()));
             }
             catch (ExcepcionValidacion ex)
             {
@@ -42,20 +42,14 @@
             }
         }
 
-        // GET api/Poliza/5
-        public Task<HttpResponseMessage> Get(int id)
+        [HttpGet]
+        [ActionName("polizasbyid")]
+        public Task<HttpResponseMessage> PolizabById(int id)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerPoliza(id)));
-                }
-                else
-                {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
-                }
+                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, controladoraPolizas.ObtenerPoliza(id)));
             }
             catch (ExcepcionValidacion ex)
             {
@@ -74,19 +68,14 @@
         {
             try
             {
-                if (ModelState.IsValid)
+                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
+                var polizas = controladoraPolizas.ObtenerPolizasCliente(id);
+
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<RespuestaPoliza>>
                 {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<Poliza>>
-                    {
-                        result = controladoraPolizas.ObtenerPolizasCliente(id),
-                        status = (int)HttpStatusCode.OK
-                    }));
-                }
-                else
-                {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
-                }
+                    result = polizas,
+                    status = (int)HttpStatusCode.OK
+                }));
             }
             catch (ExcepcionValidacion ex)
             {
@@ -103,26 +92,26 @@
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                    controladoraPolizas.RegistrarPoliza(poliza);
-                }
-                else
-                {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
-                }
+                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
+                controladoraPolizas.RegistrarPoliza(poliza);
             }
             catch (ExcepcionValidacion ex)
             {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+                {
+                    message = ex.Message,
+                    status = (int)HttpStatusCode.BadRequest
+                }));
             }
             catch (Exception)
             {
                 return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
             }
 
-            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
+            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<Cliente>>
+            {
+                status = (int)HttpStatusCode.OK
+            }));
         }
 
         // PUT api/Poliza/5
@@ -144,12 +133,15 @@
             {
                 return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Task.FromResult(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
             }
 
-            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
+            return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
+            {
+                status = (int)HttpStatusCode.OK
+            }));
         }
 
         // DELETE api/Poliza/5
@@ -167,35 +159,12 @@
                     return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
                 }
             }
-            catch (ExcepcionValidacion ex)
-            {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
-            }
             catch (Exception)
             {
                 return Task.FromResult(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
             }
 
             return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK));
-        }
-
-        [HttpGet]
-        [ActionName("tiposriesgo")]
-        public Task<HttpResponseMessage> TiposRiesgo()
-        {
-            try
-            {
-                ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, controladoraPolizas.ObtenerTiposRiesgo()));
-            }
-            catch (ExcepcionValidacion ex)
-            {
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message));
-            }
-            catch (Exception)
-            {
-                return Task.FromResult<HttpResponseMessage>(Request.CreateResponse(HttpStatusCode.InternalServerError, UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString())));
-            }
         }
 
         protected override void Dispose(bool disposing)

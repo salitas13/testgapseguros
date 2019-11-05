@@ -1,5 +1,6 @@
 ﻿namespace TestSegurosGAP.Servicios.Controllers
 {
+    using AutoMapper;
     using System;
     using System.Collections.Generic;
     using System.Net;
@@ -14,6 +15,7 @@
     using TestSegurosGAP.ModeloDatos;
     using TestSegurosGAP.Negocio.Controladoras;
     using TestSegurosGAP.Utilidades;
+    using System.Linq;
 
     /// <summary>
     /// customer controller class for testing security token
@@ -31,11 +33,11 @@
             {
                 ControladoraCliente ControladoraCliente = new ControladoraCliente(unitOfWork);
 
-                List<Cliente> clientes = ControladoraCliente.ObtenerClientes();
+                var respuesta = ControladoraCliente.ObtenerClientes();
 
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<Cliente>>
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<RespuestaCliente>>
                 {
-                    result = clientes,
+                    result = respuesta,
                     status = (int)HttpStatusCode.OK
                 }));
             }
@@ -50,35 +52,15 @@
         {
             try
             {
-                if (ModelState.IsValid)
+                ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
+
+                var cliente = controladoraCliente.ObtenerCliente(id);
+
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<RespuestaCliente>
                 {
-                    ControladoraCliente controladoraCliente = new ControladoraCliente(unitOfWork);
-
-                    var cliente = controladoraCliente.ObtenerCliente(id);
-
-                    RespuestaCliente respuesta = new RespuestaCliente
-                    {
-                        IdCliente = cliente.IdCliente,
-                        Nombres = cliente.Nombres,
-                        Apellidos = cliente.Apellidos,
-                        FechaNacimiento =cliente.FechaNacimiento,
-                        Cedula = cliente.Cedula
-                    };
-
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<RespuestaCliente>
-                    {
-                        result = respuesta,
-                        status = (int)HttpStatusCode.OK
-                    }));
-                }
-                else
-                {
-                    return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<string>
-                    {
-                        message = UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorGenerico.ToString()),
-                        status = (int)HttpStatusCode.BadRequest
-                    }));
-                }
+                    result = cliente,
+                    status = (int)HttpStatusCode.OK
+                }));
             }
             catch (Exception)
             {

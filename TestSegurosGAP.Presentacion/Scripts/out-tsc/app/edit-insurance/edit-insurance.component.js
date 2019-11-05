@@ -10,22 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+var forms_1 = require("@angular/forms");
+var operators_1 = require("rxjs/operators");
 var api_service_1 = require("../core/api.service");
 var http_1 = require("@angular/common/http");
-var AddInsuranceComponent = /** @class */ (function () {
-    function AddInsuranceComponent(formBuilder, router, activatedRoute, apiService) {
+var EditInsuranceComponent = /** @class */ (function () {
+    function EditInsuranceComponent(formBuilder, router, activatedRoute, apiService) {
         this.formBuilder = formBuilder;
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.apiService = apiService;
     }
-    AddInsuranceComponent.prototype.ngOnInit = function () {
+    EditInsuranceComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.addForm = this.formBuilder.group({
+        this.editForm = this.formBuilder.group({
             IdPoliza: [],
-            IdCliente: 0,
+            IdCliente: [],
             Nombre: [null, forms_1.Validators.required],
             Descripcion: [null, forms_1.Validators.required],
             FechaInicioVigencia: [null, forms_1.Validators.required],
@@ -36,34 +37,35 @@ var AddInsuranceComponent = /** @class */ (function () {
             Cobertura: [null, forms_1.Validators.required]
         });
         this.sub = this.activatedRoute.queryParamMap.subscribe(function (params) {
-            _this.clientId = params.get("clientId");
-            if (!_this.clientId) {
+            _this.insuranceId = params.get("insuranceId");
+            if (!_this.insuranceId) {
                 alert("Invalid action.");
-                _this.router.navigate(['list-client']);
+                _this.router.navigate(['list-insurance']);
                 return;
             }
             _this.apiService.getTypesCovering()
                 .subscribe(function (data) {
                 _this.typescovering = data.result;
+                _this.apiService.getInsuranceById(+_this.insuranceId)
+                    .subscribe(function (data) {
+                    _this.editForm.setValue(data.result);
+                });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
                     switch (error.status) {
                         case 0: //login
                             window.localStorage.removeItem("token");
                             window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
                             _this.router.navigate(['login']);
                             break;
                         case 401: //login
                             window.localStorage.removeItem("token");
                             window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
                             _this.router.navigate(['login']);
                             break;
                         case 403: //
                             window.localStorage.removeItem("token");
                             window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
                             _this.router.navigate(['login']);
                             break;
                     }
@@ -72,6 +74,10 @@ var AddInsuranceComponent = /** @class */ (function () {
             _this.apiService.getTypesRisk()
                 .subscribe(function (data) {
                 _this.typesrisk = data.result;
+                _this.apiService.getInsuranceById(+_this.insuranceId)
+                    .subscribe(function (data) {
+                    _this.editForm.setValue(data.result);
+                });
             }, function (error) {
                 if (error instanceof http_1.HttpErrorResponse) {
                     switch (error.status) {
@@ -98,30 +104,49 @@ var AddInsuranceComponent = /** @class */ (function () {
             });
         });
     };
-    AddInsuranceComponent.prototype.onSubmit = function () {
+    EditInsuranceComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.addForm.get('IdCliente').setValue(this.clientId);
-        this.apiService.createInsurance(this.addForm.value)
+        this.apiService.updateInsurance(this.editForm.value)
+            .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('Poliza creada satisfatoriamente.');
+                alert('P�liza actualizado satisfatoriamente.');
                 _this.router.navigate(['list-insurance']);
             }
             else {
-                // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
                 alert(data.message);
+            }
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
             }
         });
     };
-    AddInsuranceComponent = __decorate([
+    EditInsuranceComponent = __decorate([
         core_1.Component({
-            selector: 'app-add-insurance',
-            templateUrl: './add-insurance.component.html',
-            styleUrls: ['./add-insurance.component.css']
+            selector: 'app-edit-client',
+            templateUrl: './edit-insurance.component.html',
+            styleUrls: ['./edit-insurance.component.css']
         }),
         __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.Router, router_1.ActivatedRoute, api_service_1.ApiService])
-    ], AddInsuranceComponent);
-    return AddInsuranceComponent;
+    ], EditInsuranceComponent);
+    return EditInsuranceComponent;
 }());
-exports.AddInsuranceComponent = AddInsuranceComponent;
-//# sourceMappingURL=add-insurance.component.js.map
+exports.EditInsuranceComponent = EditInsuranceComponent;
+//# sourceMappingURL=edit-insurance.component.js.map

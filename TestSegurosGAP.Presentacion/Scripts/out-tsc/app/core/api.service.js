@@ -43,11 +43,17 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.createInsurance = function (insurance) {
         return this.http.post(this.baseUrlInsurances, insurance);
     };
+    ApiService.prototype.updateInsurance = function (insurance) {
+        return this.http.put(this.baseUrlInsurances + insurance.IdPoliza, insurance);
+    };
+    ApiService.prototype.getInsuranceById = function (id) {
+        return this.http.get(this.baseUrlInsurances + 'polizasbyid/' + id);
+    };
     ApiService.prototype.getTypesRisk = function () {
-        return this.http.get(this.baseUrlTypeCovering);
+        return this.http.get(this.baseUrlTypeRisk);
     };
     ApiService.prototype.getTypesCovering = function () {
-        return this.http.get(this.baseUrlTypeRisk);
+        return this.http.get(this.baseUrlTypeCovering);
     };
     ApiService = __decorate([
         core_1.Injectable(),

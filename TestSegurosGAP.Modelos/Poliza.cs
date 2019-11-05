@@ -24,6 +24,7 @@ namespace TestSegurosGAP.Entidades
         public int IdTipoRiesgo { get; set; }
         public int IdCliente { get; set; }
         public short Cobertura { get; set; }
+        public bool Estado { get; set; }
     
         public virtual TipoRiesgo TipoRiesgo { get; set; }
         public virtual Cliente Cliente { get; set; }

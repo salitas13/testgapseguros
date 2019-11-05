@@ -22,10 +22,10 @@ var AddClientComponent = /** @class */ (function () {
     AddClientComponent.prototype.ngOnInit = function () {
         this.addForm = this.formBuilder.group({
             IdCliente: [],
-            Nombres: ['', forms_1.Validators.required],
-            Apellidos: ['', forms_1.Validators.required],
+            Nombres: ['', [forms_1.Validators.required, forms_1.Validators.minLength(50)]],
+            Apellidos: ['', [forms_1.Validators.required, forms_1.Validators.minLength(50)]],
             FechaNacimiento: ['', forms_1.Validators.required],
-            Cedula: ['', forms_1.Validators.required]
+            Cedula: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]]
         });
     };
     AddClientComponent.prototype.onSubmit = function () {

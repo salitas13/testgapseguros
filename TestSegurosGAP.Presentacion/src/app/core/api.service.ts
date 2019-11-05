@@ -46,11 +46,19 @@ export class ApiService {
         return this.http.post<ApiResponse>(this.baseUrlInsurances, insurance);
     }
 
+    updateInsurance(insurance: Insurance): Observable<ApiResponse> {
+        return this.http.put<ApiResponse>(this.baseUrlInsurances + insurance.IdPoliza, insurance);
+    }
+
+    getInsuranceById(id: number): Observable<ApiResponse> {
+        return this.http.get<ApiResponse>(this.baseUrlInsurances + 'polizasbyid/' + id);
+    }
+
     getTypesRisk(): Observable<ApiResponse> {
-        return this.http.get<ApiResponse>(this.baseUrlTypeCovering);
+        return this.http.get<ApiResponse>(this.baseUrlTypeRisk);
     }
 
     getTypesCovering(): Observable<ApiResponse> {
-        return this.http.get<ApiResponse>(this.baseUrlTypeRisk);
+        return this.http.get<ApiResponse>(this.baseUrlTypeCovering);
     }
 }

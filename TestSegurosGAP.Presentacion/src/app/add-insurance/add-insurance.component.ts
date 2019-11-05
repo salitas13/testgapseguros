@@ -25,14 +25,14 @@ export class AddInsuranceComponent implements OnInit {
         this.addForm = this.formBuilder.group({
             IdPoliza: [],
             IdCliente: 0,
-            Nombre: ['', Validators.required],
-            Descripcion: ['', Validators.required],
-            FechaInicioVigencia: ['', Validators.required],
-            PeriodoCobertura: ['', Validators.required],
-            PrecioPoliza: ['', Validators.required],
-            IdTipoCubrimiento: ['', Validators.required],
-            IdTipoRiesgo: ['', Validators.required],
-            Cobertura: ['', Validators.required]
+            Nombre: [null, Validators.required],
+            Descripcion: [null, Validators.required],
+            FechaInicioVigencia: [null, Validators.required],
+            PeriodoCobertura: [null, Validators.required],
+            PrecioPoliza: [null, Validators.required],
+            IdTipoCubrimiento: [null, Validators.required],
+            IdTipoRiesgo: [null, Validators.required],
+            Cobertura: [null, Validators.required]
         });
 
         this.sub = this.activatedRoute.queryParamMap.subscribe(params => {
@@ -48,35 +48,34 @@ export class AddInsuranceComponent implements OnInit {
                 .subscribe(data => {
                     this.typescovering = data.result;
                 },
-                    error => {
-                        if (error instanceof HttpErrorResponse) {
-                            switch (error.status) {
-                                case 0:      //login
-                                    window.localStorage.removeItem("token");
-                                    window.localStorage.removeItem("editClientId");
-                                    window.localStorage.removeItem("editInsuranceId");
-                                    this.router.navigate(['login']);
-                                    break;
-                                case 401:      //login
-                                    window.localStorage.removeItem("token");
-                                    window.localStorage.removeItem("editClientId");
-                                    window.localStorage.removeItem("editInsuranceId");
-                                    this.router.navigate(['login']);
-                                    break;
-                                case 403:     //
-                                    window.localStorage.removeItem("token");
-                                    window.localStorage.removeItem("editClientId");
-                                    window.localStorage.removeItem("editInsuranceId");
-                                    this.router.navigate(['login']);
-                                    break;
-                            }
+                error => {
+                    if (error instanceof HttpErrorResponse) {
+                        switch (error.status) {
+                            case 0:      //login
+                                window.localStorage.removeItem("token");
+                                window.localStorage.removeItem("editClientId");
+                                window.localStorage.removeItem("editInsuranceId");
+                                this.router.navigate(['login']);
+                                break;
+                            case 401:      //login
+                                window.localStorage.removeItem("token");
+                                window.localStorage.removeItem("editClientId");
+                                window.localStorage.removeItem("editInsuranceId");
+                                this.router.navigate(['login']);
+                                break;
+                            case 403:     //
+                                window.localStorage.removeItem("token");
+                                window.localStorage.removeItem("editClientId");
+                                window.localStorage.removeItem("editInsuranceId");
+                                this.router.navigate(['login']);
+                                break;
                         }
-                    });
+                    }
+                });
 
             this.apiService.getTypesRisk()
                 .subscribe(data => {
                     this.typesrisk = data.result;
-
                 },
                     error => {
                         if (error instanceof HttpErrorResponse) {
@@ -114,7 +113,8 @@ export class AddInsuranceComponent implements OnInit {
                     alert('Poliza creada satisfatoriamente.');
                     this.router.navigate(['list-insurance']);
                 } else {
-                    alert(data.message);
+                    // Error en la validación de la cobertura de la poliza mostrar mensaje al cliente
+                    alert('El porcentaje de cubrimiento no puede ser superior al 50%');
                 }
             });
     }

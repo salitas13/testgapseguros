@@ -28,19 +28,19 @@
 
         <div class="form-group">
             <label for="typecovering">Tipo covertura:</label>
-            <select formControlName="typecovering" id="typecovering">
+            <select formControlName="IdTipoCubrimiento" id="IdTipoCubrimiento">
                 <option value="0"></option>
-                <option *ngFor="let type of typescovering | async; let i = index" [value]="typescovering[i].IdTipoCubrimiento">
+                <option *ngFor="let tytypepecovering of typescovering; let i = index" [value]="typescovering[i].IdTipoCubrimiento">
                     {{typescovering[i].Nombre}}
                 </option>
             </select>
         </div>
-
         <div class="form-group">
-            <select>
+            <label for="typerisk">Tipo riesgo:</label>
+            <select formControlName="IdTipoRiesgo" id="IdTipoRiesgo">
                 <option value="0"></option>
-                <option *ngFor="let typerisk of typesrisk" value={{IdTipoRiesgo}}>
-                    {{Nombre}}
+                <option *ngFor="let type of typesrisk; let i = index" [value]="typesrisk[i].IdTipoRiesgo">
+                    {{typesrisk[i].Nombre}}
                 </option>
             </select>
         </div>

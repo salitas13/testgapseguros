@@ -1,5 +1,5 @@
 export class Insurance {
 
-  IdPoliza: number;
-
+    IdPoliza: number;
+    Estado: boolean;
 }

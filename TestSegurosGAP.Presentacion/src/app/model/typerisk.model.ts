@@ -1,5 +1,5 @@
 export class TypeRisk {
 
-    IdRiesgo: number;
-
+    IdTipoRiesgo: number;
+    Nombre: string;
 }

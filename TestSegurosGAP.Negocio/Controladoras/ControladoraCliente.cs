@@ -4,6 +4,7 @@
     using TestSegurosGAP.Entidades;
     using TestSegurosGAP.ModeloDatos;
     using System.Linq;
+    using TestSegurosGAP.Entidades.Respuestas;
 
     public class ControladoraCliente
     {
@@ -25,14 +26,32 @@
 
         #endregion
 
-        public List<Cliente> ObtenerClientes()
+        public List<RespuestaCliente> ObtenerClientes()
         {
-            return _unitOfWork.ClienteRepository.GetAll().ToList();
+            var cientes = _unitOfWork.ClienteRepository.GetAll();
+
+            return cientes.Select(t => new RespuestaCliente
+            {
+                IdCliente = t.IdCliente,
+                Nombres = t.Nombres,
+                Apellidos = t.Apellidos,
+                FechaNacimiento = t.FechaNacimiento,
+                Cedula = t.Cedula
+            }).ToList();
         }
 
-        public Cliente ObtenerCliente(int id)
+        public RespuestaCliente ObtenerCliente(int id)
         {
-            return _unitOfWork.ClienteRepository.Find(id);
+            var cliente = _unitOfWork.ClienteRepository.Find(id);
+
+            return new RespuestaCliente
+            {
+                IdCliente = cliente.IdCliente,
+                Nombres = cliente.Nombres,
+                Apellidos = cliente.Apellidos,
+                FechaNacimiento = cliente.FechaNacimiento,
+                Cedula = cliente.Cedula
+            };
         }
 
         public void RegistrarCliente(Cliente cliente)

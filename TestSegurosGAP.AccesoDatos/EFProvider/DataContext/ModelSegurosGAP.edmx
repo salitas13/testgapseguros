@@ -29,6 +29,7 @@
           <Property Name="IdTipoRiesgo" Type="int" Nullable="false" />
           <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="Cobertura" Type="smallint" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoCubrimiento">
           <Key>
@@ -132,6 +133,7 @@
           <NavigationProperty Name="TipoRiesgo" Relationship="TestSegurosGAPModel.FK_Poliza_TipoRiesgo" FromRole="Poliza" ToRole="TipoRiesgo" />
           <NavigationProperty Name="Cliente" Relationship="TestSegurosGAPModel.FK_Poliza_Cliente" FromRole="Poliza" ToRole="Cliente" />
           <NavigationProperty Name="TipoCubrimiento" Relationship="TestSegurosGAPModel.FK_Poliza_TipoCubrimiento" FromRole="Poliza" ToRole="TipoCubrimiento" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TestSegurosGAPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Poliza" EntityType="Self.Poliza" />
@@ -236,6 +238,7 @@
           <EntitySetMapping Name="Poliza">
             <EntityTypeMapping TypeName="TestSegurosGAPModel.Poliza">
               <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Cobertura" ColumnName="Cobertura" />
                 <ScalarProperty Name="IdPoliza" ColumnName="IdPoliza" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />

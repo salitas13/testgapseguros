@@ -33,19 +33,16 @@ var ListClientComponent = /** @class */ (function () {
                     case 0: //login
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
                     case 401: //login
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
-                    case 403: //
+                    case 403:
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
                 }

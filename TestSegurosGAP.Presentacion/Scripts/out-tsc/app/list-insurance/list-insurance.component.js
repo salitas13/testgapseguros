@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var api_service_1 = require("../core/api.service");
 var http_1 = require("@angular/common/http");
+var operators_1 = require("rxjs/operators");
 var ListInsuranceComponent = /** @class */ (function () {
     function ListInsuranceComponent(router, activatedRoute, apiService) {
         this.router = router;
@@ -32,41 +33,75 @@ var ListInsuranceComponent = /** @class */ (function () {
                 _this.router.navigate(['list-client']);
                 return;
             }
-            _this.apiService.getInsurancesClient(+_this.clientId) // (+) converts string 'insuranceId' to a number
-                .subscribe(function (data) {
-                _this.insurances = data.result;
-            }, function (error) {
-                if (error instanceof http_1.HttpErrorResponse) {
-                    switch (error.status) {
-                        case 0: //login
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                        case 401: //login
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                        case 403: //
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                    }
-                }
-            });
+            _this.updateList();
         });
     };
-    ListInsuranceComponent.prototype.editEnsurance = function (insurance) {
-        window.localStorage.removeItem("editInsuranceId");
-        window.localStorage.setItem("editInsuranceId", insurance.IdPoliza.toString());
-        this.router.navigate(['edit-insurance']);
+    ListInsuranceComponent.prototype.updateList = function () {
+        var _this = this;
+        this.apiService.getInsurancesClient(+this.clientId) // (+) converts string 'insuranceId' to a number
+            .subscribe(function (data) {
+            _this.insurances = data.result;
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
+            }
+        });
+    };
+    ListInsuranceComponent.prototype.editInsurance = function (insurance) {
+        this.router.navigate(['edit-insurance'], { queryParams: { insuranceId: insurance.IdPoliza.toString() } });
     };
     ;
+    ListInsuranceComponent.prototype.cancelInsurance = function (insurance) {
+        var _this = this;
+        insurance.Estado = false;
+        this.apiService.updateInsurance(insurance)
+            .pipe(operators_1.first())
+            .subscribe(function (data) {
+            if (data.status === 200) {
+                alert('P�liza cancelada satisfatoriamente.');
+                _this.updateList();
+            }
+            else {
+                alert(data.message);
+            }
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
+            }
+        });
+    };
     ListInsuranceComponent.prototype.addInsurance = function () {
         this.router.navigate(['add-insurance'], { queryParams: { clientId: this.clientId.toString() } });
     };

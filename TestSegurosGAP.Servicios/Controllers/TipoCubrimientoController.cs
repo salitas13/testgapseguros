@@ -30,7 +30,7 @@
             try
             {
                 ControladoraPoliza controladoraPolizas = new ControladoraPoliza(unitOfWork);
-                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<TipoCubrimiento>>
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, new Respuesta<List<RespuestaTipoCubrimiento>>
                 {
                     result = controladoraPolizas.ObtenerTiposCubrimiento(),
                     status = (int)HttpStatusCode.OK

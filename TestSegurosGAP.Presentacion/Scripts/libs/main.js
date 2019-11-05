@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Adicionar Cliente</h2>\n  <form [formGroup]=\"addForm\" (ngSubmit)=\"onSubmit()\">\n    <div class=\"form-group\">\n      <label for=\"Nombres\">Nombres:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Nombres\" placeholder=\"Nombres\" name=\"Nombres\" class=\"form-control\" id=\"Nombres\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"Apellidos\">Apellidos:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Apellidos\" placeholder=\"Apellidos\" name=\"Apellidos\" class=\"form-control\" id=\"Apellidos\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"FechaNacimiento\">Fecha de nacimiento:</label>\n      <input type=\"date\" formControlName=\"FechaNacimiento\" placeholder=\"Fecha de nacimiento\" name=\"FechaNacimiento\" class=\"form-control\" id=\"FechaNacimiento\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"Cedula\">C�dula:</label>\n      <input type=\"number\" maxlength=\"10\" formControlName=\"Cedula\" placeholder=\"C�dula\" name=\"Cedula\" class=\"form-control\" id=\"Cedula\">\n    </div>\n\n    <button class=\"btn btn-success\">Crear</button>\n  </form>\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Adicionar Cliente</h2>\n  <form [formGroup]=\"addForm\" (ngSubmit)=\"onSubmit()\" novalidate=\"\">\n    <div class=\"form-group\">\n      <label for=\"Nombres\">Nombres:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Nombres\" placeholder=\"Nombres\" name=\"Nombres\" class=\"form-control\" id=\"Nombres\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"Apellidos\">Apellidos:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Apellidos\" placeholder=\"Apellidos\" name=\"Apellidos\" class=\"form-control\" id=\"Apellidos\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"FechaNacimiento\">Fecha de nacimiento:</label>\n      <input type=\"date\" formControlName=\"FechaNacimiento\" placeholder=\"Fecha de nacimiento\" name=\"FechaNacimiento\" class=\"form-control\" id=\"FechaNacimiento\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"Cedula\">C�dula:</label>\n      <input type=\"number\" maxlength=\"10\" formControlName=\"Cedula\" placeholder=\"C�dula\" name=\"Cedula\" class=\"form-control\" id=\"Cedula\">\n    </div>\n\n    <button class=\"btn btn-success\" [disabled]=\"addForm.invalid\">Crear</button>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -77,10 +77,10 @@ var AddClientComponent = /** @class */ (function () {
     AddClientComponent.prototype.ngOnInit = function () {
         this.addForm = this.formBuilder.group({
             IdCliente: [],
-            Nombres: ['', forms_1.Validators.required],
-            Apellidos: ['', forms_1.Validators.required],
+            Nombres: ['', [forms_1.Validators.required, forms_1.Validators.minLength(50)]],
+            Apellidos: ['', [forms_1.Validators.required, forms_1.Validators.minLength(50)]],
             FechaNacimiento: ['', forms_1.Validators.required],
-            Cedula: ['', forms_1.Validators.required]
+            Cedula: ['', [forms_1.Validators.required, forms_1.Validators.minLength(10)]]
         });
     };
     AddClientComponent.prototype.onSubmit = function () {
@@ -129,7 +129,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\r\n    <h2 class=\"text-center\">Adicionar P�liza</h2>\r\n    <form [formGroup]=\"addForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"form-group\">\r\n            <label for=\"Nombre\">Nombre:</label>\r\n            <input type=\"text\" maxlength=\"50\" formControlName=\"Nombre\" placeholder=\"Nombre\" name=\"Nombre\" class=\"form-control\" id=\"Nombre\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"Descripcion\">Descripci�n:</label>\r\n            <input type=\"text\" maxlength=\"200\" formControlName=\"Descripcion\" placeholder=\"Descripcion\" name=\"Descripcion\" class=\"form-control\" id=\"Descripcion\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"FechaInicioVigencia\">Fecha de nacimiento:</label>\r\n            <input type=\"date\" formControlName=\"FechaInicioVigencia\" placeholder=\"Fecha inicio vigencia\" name=\"FechaInicioVigencia\" class=\"form-control\" id=\"FechaInicioVigencia\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"PeriodoCobertura\">Per�odo de cobertura:</label>\r\n            <input type=\"number\" maxlength=\"3\" formControlName=\"PeriodoCobertura\" placeholder=\"Per�odo de cobertura\" name=\"PeriodoCobertura\" class=\"form-control\" id=\"PeriodoCobertura\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"PrecioPoliza\">Precio p�liza:</label>\r\n            <input type=\"number\" maxlength=\"7\" formControlName=\"PrecioPoliza\" placeholder=\"Precio p�liza\" name=\"PrecioPoliza\" class=\"form-control\" id=\"PrecioPoliza\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"typecovering\">Tipo covertura:</label>\r\n            <select formControlName=\"typecovering\" id=\"typecovering\">\r\n                <option value=\"0\"></option>\r\n                <option *ngFor=\"let type of typescovering | async; let i = index\" [value]=\"typescovering[i].IdTipoCubrimiento\">\r\n                    {{typescovering[i].Nombre}}\r\n                </option>\r\n            </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <select>\r\n                <option value=\"0\"></option>\r\n                <option *ngFor=\"let typerisk of typesrisk\" value={{IdTipoRiesgo}}>\r\n                    {{Nombre}}\r\n                </option>\r\n            </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"Cobertura\">Cobertura:</label>\r\n            <input type=\"number\" maxlength=\"3\" formControlName=\"Cobertura\" placeholder=\"Cobertura\" name=\"Cobertura\" class=\"form-control\" id=\"Cobertura\">\r\n        </div>\r\n\r\n        <button class=\"btn btn-success\">Crear</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"col-md-6 user-container\">\r\n    <h2 class=\"text-center\">Adicionar P�liza</h2>\r\n    <form [formGroup]=\"addForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"form-group\">\r\n            <label for=\"Nombre\">Nombre:</label>\r\n            <input type=\"text\" maxlength=\"50\" formControlName=\"Nombre\" placeholder=\"Nombre\" name=\"Nombre\" class=\"form-control\" id=\"Nombre\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"Descripcion\">Descripci�n:</label>\r\n            <input type=\"text\" maxlength=\"200\" formControlName=\"Descripcion\" placeholder=\"Descripcion\" name=\"Descripcion\" class=\"form-control\" id=\"Descripcion\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"FechaInicioVigencia\">Fecha de nacimiento:</label>\r\n            <input type=\"date\" formControlName=\"FechaInicioVigencia\" placeholder=\"Fecha inicio vigencia\" name=\"FechaInicioVigencia\" class=\"form-control\" id=\"FechaInicioVigencia\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"PeriodoCobertura\">Per�odo de cobertura:</label>\r\n            <input type=\"number\" maxlength=\"3\" formControlName=\"PeriodoCobertura\" placeholder=\"Per�odo de cobertura\" name=\"PeriodoCobertura\" class=\"form-control\" id=\"PeriodoCobertura\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"PrecioPoliza\">Precio p�liza:</label>\r\n            <input type=\"number\" maxlength=\"7\" formControlName=\"PrecioPoliza\" placeholder=\"Precio p�liza\" name=\"PrecioPoliza\" class=\"form-control\" id=\"PrecioPoliza\">\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"typecovering\">Tipo covertura:</label>\r\n            <select formControlName=\"IdTipoCubrimiento\" id=\"IdTipoCubrimiento\">\r\n                <option value=\"0\"></option>\r\n                <option *ngFor=\"let tytypepecovering of typescovering; let i = index\" [value]=\"typescovering[i].IdTipoCubrimiento\">\r\n                    {{typescovering[i].Nombre}}\r\n                </option>\r\n            </select>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"typerisk\">Tipo riesgo:</label>\r\n            <select formControlName=\"IdTipoRiesgo\" id=\"IdTipoRiesgo\">\r\n                <option value=\"0\"></option>\r\n                <option *ngFor=\"let type of typesrisk; let i = index\" [value]=\"typesrisk[i].IdTipoRiesgo\">\r\n                    {{typesrisk[i].Nombre}}\r\n                </option>\r\n            </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"Cobertura\">Cobertura:</label>\r\n            <input type=\"number\" maxlength=\"3\" formControlName=\"Cobertura\" placeholder=\"Cobertura\" name=\"Cobertura\" class=\"form-control\" id=\"Cobertura\">\r\n        </div>\r\n\r\n        <button class=\"btn btn-success\">Crear</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -169,14 +169,14 @@ var AddInsuranceComponent = /** @class */ (function () {
         this.addForm = this.formBuilder.group({
             IdPoliza: [],
             IdCliente: 0,
-            Nombre: ['', forms_1.Validators.required],
-            Descripcion: ['', forms_1.Validators.required],
-            FechaInicioVigencia: ['', forms_1.Validators.required],
-            PeriodoCobertura: ['', forms_1.Validators.required],
-            PrecioPoliza: ['', forms_1.Validators.required],
-            IdTipoCubrimiento: ['', forms_1.Validators.required],
-            IdTipoRiesgo: ['', forms_1.Validators.required],
-            Cobertura: ['', forms_1.Validators.required]
+            Nombre: [null, forms_1.Validators.required],
+            Descripcion: [null, forms_1.Validators.required],
+            FechaInicioVigencia: [null, forms_1.Validators.required],
+            PeriodoCobertura: [null, forms_1.Validators.required],
+            PrecioPoliza: [null, forms_1.Validators.required],
+            IdTipoCubrimiento: [null, forms_1.Validators.required],
+            IdTipoRiesgo: [null, forms_1.Validators.required],
+            Cobertura: [null, forms_1.Validators.required]
         });
         this.sub = this.activatedRoute.queryParamMap.subscribe(function (params) {
             _this.clientId = params.get("clientId");
@@ -251,6 +251,7 @@ var AddInsuranceComponent = /** @class */ (function () {
                 _this.router.navigate(['list-insurance']);
             }
             else {
+                // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
                 alert(data.message);
             }
         });
@@ -340,7 +341,7 @@ var edit_client_component_1 = __webpack_require__(/*! ./edit-client/edit-client.
 var list_client_component_1 = __webpack_require__(/*! ./list-client/list-client.component */ "./src/app/list-client/list-client.component.ts");
 var list_insurance_component_1 = __webpack_require__(/*! ./list-insurance/list-insurance.component */ "./src/app/list-insurance/list-insurance.component.ts");
 var add_insurance_component_1 = __webpack_require__(/*! ./add-insurance/add-insurance.component */ "./src/app/add-insurance/add-insurance.component.ts");
-//import { EditInsuranceComponent } from './edit-insurance/add-insurance.component'; 
+var edit_insurance_component_1 = __webpack_require__(/*! ./edit-insurance/edit-insurance.component */ "./src/app/edit-insurance/edit-insurance.component.ts");
 var api_service_1 = __webpack_require__(/*! ./core/api.service */ "./src/app/core/api.service.ts");
 var http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
@@ -359,6 +360,7 @@ var AppModule = /** @class */ (function () {
                 list_client_component_1.ListClientComponent,
                 list_insurance_component_1.ListInsuranceComponent,
                 add_insurance_component_1.AddInsuranceComponent,
+                edit_insurance_component_1.EditInsuranceComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -398,7 +400,7 @@ var list_client_component_1 = __webpack_require__(/*! ./list-client/list-client.
 var edit_client_component_1 = __webpack_require__(/*! ./edit-client/edit-client.component */ "./src/app/edit-client/edit-client.component.ts");
 var list_insurance_component_1 = __webpack_require__(/*! ./list-insurance/list-insurance.component */ "./src/app/list-insurance/list-insurance.component.ts");
 var add_insurance_component_1 = __webpack_require__(/*! ./add-insurance/add-insurance.component */ "./src/app/add-insurance/add-insurance.component.ts");
-//import { EditInsuranceComponent } from "./add-insurance/add-insurance.component";
+var edit_insurance_component_1 = __webpack_require__(/*! ./edit-insurance/edit-insurance.component */ "./src/app/edit-insurance/edit-insurance.component.ts");
 var routes = [
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'add-client', component: add_client_component_1.AddClientComponent },
@@ -407,6 +409,7 @@ var routes = [
     { path: '', component: login_component_1.LoginComponent },
     { path: 'list-insurance', component: list_insurance_component_1.ListInsuranceComponent },
     { path: 'add-insurance', component: add_insurance_component_1.AddInsuranceComponent },
+    { path: 'edit-insurance', component: edit_insurance_component_1.EditInsuranceComponent },
 ];
 exports.routing = router_1.RouterModule.forRoot(routes);
 
@@ -466,11 +469,17 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.createInsurance = function (insurance) {
         return this.http.post(this.baseUrlInsurances, insurance);
     };
+    ApiService.prototype.updateInsurance = function (insurance) {
+        return this.http.put(this.baseUrlInsurances + insurance.IdPoliza, insurance);
+    };
+    ApiService.prototype.getInsuranceById = function (id) {
+        return this.http.get(this.baseUrlInsurances + 'polizasbyid/' + id);
+    };
     ApiService.prototype.getTypesRisk = function () {
-        return this.http.get(this.baseUrlTypeCovering);
+        return this.http.get(this.baseUrlTypeRisk);
     };
     ApiService.prototype.getTypesCovering = function () {
-        return this.http.get(this.baseUrlTypeRisk);
+        return this.http.get(this.baseUrlTypeCovering);
     };
     ApiService = __decorate([
         core_1.Injectable(),
@@ -543,7 +552,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Editar Cliente</h2>\n  <form [formGroup]=\"editForm\" (ngSubmit)=\"onSubmit()\">\n    <div class=\"hidden\">\n      <input type=\"text\" formControlName=\"IdCliente\" placeholder=\"idcliente\" name=\"IdCliente\" class=\"form-control\" id=\"IdCliente\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"Nombres\">Nombres:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Nombres\" placeholder=\"Nombres\" name=\"Nombres\" class=\"form-control\" id=\"Nombres\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"apellidos\">Apellidos:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Apellidos\" placeholder=\"Apellidos\" name=\"Apellidos\" class=\"form-control\" id=\"Apellidos\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"fechanacimiento\">Fecha de nacimiento:</label>\n      <input type=\"date\" formControlName=\"FechaNacimiento\" placeholder=\"Fecha de nacimiento\" name=\"FechaNacimiento\" class=\"form-control\" id=\"FechaNacimiento\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"cedula\">Cedula:</label>\n      <input type=\"number\" maxlength=\"10\" formControlName=\"Cedula\" placeholder=\"C�dula\" name=\"Cedula\" class=\"form-control\" id=\"Cedula\">\n    </div>\n\n    <button class=\"btn btn-success\">Update</button>\n  </form>\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Editar Cliente</h2>\n  <form [formGroup]=\"editForm\" (ngSubmit)=\"onSubmit()\">\n    <div class=\"hidden\">\n      <input type=\"text\" formControlName=\"IdCliente\" placeholder=\"idcliente\" name=\"IdCliente\" class=\"form-control\" id=\"IdCliente\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"Nombres\">Nombres:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Nombres\" placeholder=\"Nombres\" name=\"Nombres\" class=\"form-control\" id=\"Nombres\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"apellidos\">Apellidos:</label>\n      <input type=\"text\" maxlength=\"50\" formControlName=\"Apellidos\" placeholder=\"Apellidos\" name=\"Apellidos\" class=\"form-control\" id=\"Apellidos\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"fechanacimiento\">Fecha de nacimiento:</label>\n      <input type=\"date\" formControlName=\"FechaNacimiento\" placeholder=\"Fecha de nacimiento\" name=\"FechaNacimiento\" class=\"form-control\" id=\"FechaNacimiento\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"cedula\">Cedula:</label>\n      <input type=\"number\" maxlength=\"10\" formControlName=\"Cedula\" placeholder=\"C�dula\" name=\"Cedula\" class=\"form-control\" id=\"Cedula\">\n    </div>\n\n    <button class=\"btn btn-success\">Actualizar</button>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -647,6 +656,191 @@ exports.EditClientComponent = EditClientComponent;
 
 /***/ }),
 
+/***/ "./src/app/edit-insurance/edit-insurance.component.css":
+/*!*************************************************************!*\
+  !*** ./src/app/edit-insurance/edit-insurance.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2VkaXQtaW5zdXJhbmNlL2VkaXQtaW5zdXJhbmNlLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/edit-insurance/edit-insurance.component.html":
+/*!**************************************************************!*\
+  !*** ./src/app/edit-insurance/edit-insurance.component.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 class=\"text-center\">Editar P�liza</h2>\n  <form [formGroup]=\"editForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"hidden\">\r\n          <input type=\"text\" formControlName=\"IdPoliza\" placeholder=\"IdPoliza\" name=\"IdPoliza\" class=\"form-control\" id=\"IdPoliza\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"Nombre\">Nombre:</label>\r\n          <input type=\"text\" maxlength=\"50\" formControlName=\"Nombre\" placeholder=\"Nombre\" name=\"Nombre\" class=\"form-control\" id=\"Nombre\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Descripcion\">Descripci�n:</label>\r\n          <input type=\"text\" maxlength=\"200\" formControlName=\"Descripcion\" placeholder=\"Descripcion\" name=\"Descripcion\" class=\"form-control\" id=\"Descripcion\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"FechaInicioVigencia\">Fecha de nacimiento:</label>\r\n          <input type=\"date\" formControlName=\"FechaInicioVigencia\" placeholder=\"Fecha inicio vigencia\" name=\"FechaInicioVigencia\" class=\"form-control\" id=\"FechaInicioVigencia\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PeriodoCobertura\">Per�odo de cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"PeriodoCobertura\" placeholder=\"Per�odo de cobertura\" name=\"PeriodoCobertura\" class=\"form-control\" id=\"PeriodoCobertura\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"PrecioPoliza\">Precio p�liza:</label>\r\n          <input type=\"number\" maxlength=\"7\" formControlName=\"PrecioPoliza\" placeholder=\"Precio p�liza\" name=\"PrecioPoliza\" class=\"form-control\" id=\"PrecioPoliza\">\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"typecovering\">Tipo covertura:</label>\r\n          <select formControlName=\"IdTipoCubrimiento\" id=\"IdTipoCubrimiento\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let tytypepecovering of typescovering; let i = index\" [value]=\"typescovering[i].IdTipoCubrimiento\">\r\n                  {{typescovering[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n          <label for=\"typerisk\">Tipo riesgo:</label>\r\n          <select formControlName=\"IdTipoRiesgo\" id=\"IdTipoRiesgo\">\r\n              <option value=\"0\"></option>\r\n              <option *ngFor=\"let type of typesrisk; let i = index\" [value]=\"typesrisk[i].IdTipoRiesgo\">\r\n                  {{typesrisk[i].Nombre}}\r\n              </option>\r\n          </select>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n          <label for=\"Cobertura\">Cobertura:</label>\r\n          <input type=\"number\" maxlength=\"3\" formControlName=\"Cobertura\" placeholder=\"Cobertura\" name=\"Cobertura\" class=\"form-control\" id=\"Cobertura\">\r\n      </div>\r\n\r\n      <button class=\"btn btn-success\">Crear</button>\r\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/edit-insurance/edit-insurance.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/edit-insurance/edit-insurance.component.ts ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var api_service_1 = __webpack_require__(/*! ../core/api.service */ "./src/app/core/api.service.ts");
+var http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var EditInsuranceComponent = /** @class */ (function () {
+    function EditInsuranceComponent(formBuilder, router, activatedRoute, apiService) {
+        this.formBuilder = formBuilder;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
+        this.apiService = apiService;
+    }
+    EditInsuranceComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.editForm = this.formBuilder.group({
+            IdPoliza: [],
+            IdCliente: [],
+            Nombre: [null, forms_1.Validators.required],
+            Descripcion: [null, forms_1.Validators.required],
+            FechaInicioVigencia: [null, forms_1.Validators.required],
+            PeriodoCobertura: [null, forms_1.Validators.required],
+            PrecioPoliza: [null, forms_1.Validators.required],
+            IdTipoCubrimiento: [null, forms_1.Validators.required],
+            IdTipoRiesgo: [null, forms_1.Validators.required],
+            Cobertura: [null, forms_1.Validators.required]
+        });
+        this.sub = this.activatedRoute.queryParamMap.subscribe(function (params) {
+            _this.insuranceId = params.get("insuranceId");
+            if (!_this.insuranceId) {
+                alert("Invalid action.");
+                _this.router.navigate(['list-insurance']);
+                return;
+            }
+            _this.apiService.getTypesCovering()
+                .subscribe(function (data) {
+                _this.typescovering = data.result;
+                _this.apiService.getInsuranceById(+_this.insuranceId)
+                    .subscribe(function (data) {
+                    _this.editForm.setValue(data.result);
+                });
+            }, function (error) {
+                if (error instanceof http_1.HttpErrorResponse) {
+                    switch (error.status) {
+                        case 0: //login
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            _this.router.navigate(['login']);
+                            break;
+                        case 401: //login
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            _this.router.navigate(['login']);
+                            break;
+                        case 403: //
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            _this.router.navigate(['login']);
+                            break;
+                    }
+                }
+            });
+            _this.apiService.getTypesRisk()
+                .subscribe(function (data) {
+                _this.typesrisk = data.result;
+                _this.apiService.getInsuranceById(+_this.insuranceId)
+                    .subscribe(function (data) {
+                    _this.editForm.setValue(data.result);
+                });
+            }, function (error) {
+                if (error instanceof http_1.HttpErrorResponse) {
+                    switch (error.status) {
+                        case 0: //login
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            window.localStorage.removeItem("editInsuranceId");
+                            _this.router.navigate(['login']);
+                            break;
+                        case 401: //login
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            window.localStorage.removeItem("editInsuranceId");
+                            _this.router.navigate(['login']);
+                            break;
+                        case 403: //
+                            window.localStorage.removeItem("token");
+                            window.localStorage.removeItem("editClientId");
+                            window.localStorage.removeItem("editInsuranceId");
+                            _this.router.navigate(['login']);
+                            break;
+                    }
+                }
+            });
+        });
+    };
+    EditInsuranceComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.apiService.updateInsurance(this.editForm.value)
+            .pipe(operators_1.first())
+            .subscribe(function (data) {
+            if (data.status === 200) {
+                alert('P�liza actualizado satisfatoriamente.');
+                _this.router.navigate(['list-insurance']);
+            }
+            else {
+                alert(data.message);
+            }
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
+            }
+        });
+    };
+    EditInsuranceComponent = __decorate([
+        core_1.Component({
+            selector: 'app-edit-client',
+            template: __webpack_require__(/*! ./edit-insurance.component.html */ "./src/app/edit-insurance/edit-insurance.component.html"),
+            styles: [__webpack_require__(/*! ./edit-insurance.component.css */ "./src/app/edit-insurance/edit-insurance.component.css")]
+        }),
+        __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.Router, router_1.ActivatedRoute, api_service_1.ApiService])
+    ], EditInsuranceComponent);
+    return EditInsuranceComponent;
+}());
+exports.EditInsuranceComponent = EditInsuranceComponent;
+
+
+/***/ }),
+
 /***/ "./src/app/list-client/list-client.component.css":
 /*!*******************************************************!*\
   !*** ./src/app/list-client/list-client.component.css ***!
@@ -665,7 +859,7 @@ module.exports = ".user-container {\n  display: -webkit-box;\n  display: flex;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 style=\"margin: auto\"> Detalles cliente</h2>\n  <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addClient()\"> Adicionar Cliente</button>\n  <table class=\"table table-striped\">\n    <thead>\n    <tr>\n      <th class=\"hidden\">Id</th>\n      <th>Nombres</th>\n      <th>Apellidos</th>\n      <th>Fecha de Nacimiento</th>\n      <th>Cedula</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let client of clients\">\n      <td class=\"hidden\">{{client.IdCliente}}</td>\n      <td>{{client.Nombres}}</td>\n      <td>{{client.Apellidos}}</td>\n      <td>{{client.FechaNacimiento}}</td>\n      <td>{{client.Cedula}}</td>\n      <td><button class=\"btn btn-success\" (click)=\"viewInsurancesClient(client)\"> Ver p�lizas</button>\n        <button class=\"btn btn-success\" (click)=\"editClient(client)\" style=\"margin-left: 20px;\"> Editar</button></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\n    <br />\n  <h2 style=\"margin: auto\"> Detalles cliente</h2>\n    <br />\n  <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addClient()\"> Adicionar Cliente</button>\n    <br />\n  <table class=\"table table-striped\">\n    <thead>\n        <tr>\r\n            <th class=\"hidden\">Id</th>\r\n            <th>Nombres</th>\r\n            <th>Apellidos</th>\r\n            <th>Fecha de Nacimiento</th>\r\n            <th>Cedula</th>\r\n            <th></th>\r\n            <th></th>\r\n        </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let client of clients\">\n      <td class=\"hidden\">{{client.IdCliente}}</td>\n      <td>{{client.Nombres}}</td>\n      <td>{{client.Apellidos}}</td>\n      <td>{{client.FechaNacimiento}}</td>\n      <td>{{client.Cedula}}</td>\n      <td><button class=\"btn btn-success\" (click)=\"viewInsurancesClient(client)\" style=\"margin-left: 5px;\">Ver p�lizas</button></td>\n        <td><button class=\"btn btn-success\" (click)=\"editClient(client)\" style=\"margin-left: 5px;\">Editar</button></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
@@ -712,19 +906,16 @@ var ListClientComponent = /** @class */ (function () {
                     case 0: //login
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
                     case 401: //login
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
-                    case 403: //
+                    case 403:
                         window.localStorage.removeItem("token");
                         window.localStorage.removeItem("editClientId");
-                        window.localStorage.removeItem("editInsuranceId");
                         _this.router.navigate(['login']);
                         break;
                 }
@@ -777,7 +968,7 @@ module.exports = ".user-container {\n  display: -webkit-box;\n  display: flex;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\n  <h2 style=\"margin: auto\"> Detalles de polizas: {{nombrecliente}}</h2>\n  <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addInsurance()\"> Adicionar poliza</button>\n  <table class=\"table table-striped\">\n    <thead>\n        <tr>\r\n            <th class=\"hidden\">Id</th>\r\n            <th>Nombre</th>\r\n            <th>Descripci�n</th>\r\n            <th>FechaInicioVigencia</th>\r\n            <th>Periodo cobertura</th>\r\n            <th>PrecioPoliza</th>\r\n            <th>Tipo cubrimiento</th>\r\n            <th>Tipo riesgo</th>\r\n            <th>Cobertura</th>\r\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let insurance of insurances\">\r\n            <td class=\"hidden\">{{insuranre.IdPoliza}}</td>\r\n            <td>{{insurance.Nombre}}</td>\r\n            <td>{{insurance.Descripcion}}</td>\r\n            <td>{{insurance.FechaInicioVigencia}}</td>\r\n            <td>{{insurance.PeriodoCobertura}}</td>\r\n            <td>{{insurance.PrecioPoliza}}</td>\r\n            <td>{{insurance.TipoCubrimiento.Nombre}}</td>\r\n            <td>{{insurance.TipoRiesgo.Nombre}}</td>\r\n            <td>{{insurance.Cobertura}}%</td>\r\n            <td>\r\n                <button class=\"btn btn-success\" (click)=\"viewInsuranceClient(insurance)\"> Cancelar</button>\r\n                <button class=\"btn btn-success\" (click)=\"editInsurance(insurance)\" style=\"margin-left: 20px;\"> Editar</button>\r\n            </td>\r\n        </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\r\n    <br />\r\n    <h2 style=\"margin: auto\">Detalles de polizas</h2>\r\n    <br />\r\n    <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addInsurance()\"> Adicionar poliza</button>\r\n    <br />\r\n    <table class=\"table table-striped\">\r\n        <thead>\r\n            <tr>\r\n                <th class=\"hidden\">Id</th>\r\n                <th>Nombre</th>\r\n                <th>Descripci�n</th>\r\n                <th>FechaInicioVigencia</th>\r\n                <th>Periodo cobertura</th>\r\n                <th>PrecioPoliza</th>\r\n                <th>Tipo cubrimiento</th>\r\n                <th>Tipo riesgo</th>\r\n                <th>Cobertura</th>\r\n                <th>Estado</th>\r\n                <th></th>\r\n                <th></th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let insurance of insurances\">\r\n                <td class=\"hidden\">{{insurance.IdPoliza}}</td>\r\n                <td>{{insurance.Nombre}}</td>\r\n                <td>{{insurance.Descripcion}}</td>\r\n                <td>{{insurance.FechaInicioVigencia}}</td>\r\n                <td>{{insurance.PeriodoCobertura}}</td>\r\n                <td>{{insurance.PrecioPoliza}}</td>\r\n                <td>{{insurance.TipoCubrimiento.Nombre}}</td>\r\n                <td>{{insurance.TipoRiesgo.Nombre}}</td>\r\n                <td>{{insurance.Cobertura}}%</td>\r\n                <td>{{insurance.Estado ? 'Activo' : 'Cancelado'}}</td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"cancelInsurance(insurance)\" style=\"margin-left: 5px;\">Cancelar</button>\r\n                </td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"editInsurance(insurance)\" style=\"margin-left: 5px;\">Editar</button>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\n"
 
 /***/ }),
 
@@ -804,6 +995,7 @@ var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/c
 var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var api_service_1 = __webpack_require__(/*! ../core/api.service */ "./src/app/core/api.service.ts");
 var http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var ListInsuranceComponent = /** @class */ (function () {
     function ListInsuranceComponent(router, activatedRoute, apiService) {
         this.router = router;
@@ -823,41 +1015,75 @@ var ListInsuranceComponent = /** @class */ (function () {
                 _this.router.navigate(['list-client']);
                 return;
             }
-            _this.apiService.getInsurancesClient(+_this.clientId) // (+) converts string 'insuranceId' to a number
-                .subscribe(function (data) {
-                _this.insurances = data.result;
-            }, function (error) {
-                if (error instanceof http_1.HttpErrorResponse) {
-                    switch (error.status) {
-                        case 0: //login
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                        case 401: //login
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                        case 403: //
-                            window.localStorage.removeItem("token");
-                            window.localStorage.removeItem("editClientId");
-                            window.localStorage.removeItem("editInsuranceId");
-                            _this.router.navigate(['login']);
-                            break;
-                    }
-                }
-            });
+            _this.updateList();
         });
     };
-    ListInsuranceComponent.prototype.editEnsurance = function (insurance) {
-        window.localStorage.removeItem("editInsuranceId");
-        window.localStorage.setItem("editInsuranceId", insurance.IdPoliza.toString());
-        this.router.navigate(['edit-insurance']);
+    ListInsuranceComponent.prototype.updateList = function () {
+        var _this = this;
+        this.apiService.getInsurancesClient(+this.clientId) // (+) converts string 'insuranceId' to a number
+            .subscribe(function (data) {
+            _this.insurances = data.result;
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
+            }
+        });
+    };
+    ListInsuranceComponent.prototype.editInsurance = function (insurance) {
+        this.router.navigate(['edit-insurance'], { queryParams: { insuranceId: insurance.IdPoliza.toString() } });
     };
     ;
+    ListInsuranceComponent.prototype.cancelInsurance = function (insurance) {
+        var _this = this;
+        insurance.Estado = false;
+        this.apiService.updateInsurance(insurance)
+            .pipe(operators_1.first())
+            .subscribe(function (data) {
+            if (data.status === 200) {
+                alert('P�liza cancelada satisfatoriamente.');
+                _this.updateList();
+            }
+            else {
+                alert(data.message);
+            }
+        }, function (error) {
+            if (error instanceof http_1.HttpErrorResponse) {
+                switch (error.status) {
+                    case 0: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 401: //login
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                    case 403: //
+                        window.localStorage.removeItem("token");
+                        window.localStorage.removeItem("editClientId");
+                        _this.router.navigate(['login']);
+                        break;
+                }
+            }
+        });
+    };
     ListInsuranceComponent.prototype.addInsurance = function () {
         this.router.navigate(['add-insurance'], { queryParams: { clientId: this.clientId.toString() } });
     };
@@ -895,7 +1121,7 @@ module.exports = ".error{\n  color: #FF0000;\n}\n.login-container {\n  display: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n\r\n    <div class=\"col-md-6 login-container\">\r\n        <h2 style=\"margin: auto\">Login </h2>\r\n        <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"form-group\">\r\n                <label for=\"username\">Username:</label>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"username\" id=\"username\" autocomplete=\"off\">\r\n                <div class=\"error\" *ngIf=\"loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched\">Username is required</div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"pwd\">Password:</label>\r\n                <input type=\"password\" class=\"form-control\" formControlName=\"password\" id=\"pwd\" autocomplete=\"off\">\r\n                <div class=\"error\" *ngIf=\"loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched\">Password is required</div>\r\n            </div>\r\n            <button class=\"btn btn-success\" [disabled]=\"loginForm.invalid\">Login</button>\r\n            <div *ngIf=\"invalidLogin\" class=\"error\">\r\n                <div>Invalid credentials.</div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n\r\n    <div class=\"col-md-6 login-container\">\r\n        <h2 style=\"margin: auto\">Login </h2>\r\n        <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"form-group\">\r\n                <label for=\"username\">Username:</label>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"username\" id=\"username\" autocomplete=\"off\">\r\n                <div class=\"error\" *ngIf=\"loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched\">Username is required</div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"pwd\">Password:</label>\r\n                <input type=\"password\" class=\"form-control\" formControlName=\"password\" id=\"pwd\" autocomplete=\"off\">\r\n                <div class=\"error\" *ngIf=\"loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched\">Password is required</div>\r\n            </div>\r\n            <button class=\"btn btn-success\" [disabled]=\"loginForm.invalid\">Login</button>\r\n            <div *ngIf=\"invalidLogin\" class=\"error\">\r\n                <div>Credenciales invalidas.</div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -950,15 +1176,15 @@ var LoginComponent = /** @class */ (function () {
         });
     };
     LoginComponent.prototype.ngOnInit = function () {
+        this.loginForm = this.formBuilder.group({
+            username: ['', forms_1.Validators.compose([forms_1.Validators.required])],
+            password: ['', forms_1.Validators.required]
+        });
         if (window.localStorage.getItem('token')) {
             this.router.navigate(['list-client']);
             return;
         }
         window.localStorage.removeItem('token');
-        this.loginForm = this.formBuilder.group({
-            username: ['', forms_1.Validators.compose([forms_1.Validators.required])],
-            password: ['', forms_1.Validators.required]
-        });
     };
     LoginComponent = __decorate([
         core_1.Component({

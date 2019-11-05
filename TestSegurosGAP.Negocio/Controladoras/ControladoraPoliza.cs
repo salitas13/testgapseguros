@@ -7,6 +7,7 @@
     using TestSegurosGAP.ModeloDatos;
     using TestSegurosGAP.Utilidades;
     using System.Linq;
+    using TestSegurosGAP.Entidades.Respuestas;
 
     public class ControladoraPoliza
     {
@@ -28,9 +29,24 @@
 
         #endregion
 
-        public List<Poliza> ObtenerPolizas()
+        public List<RespuestaPoliza> ObtenerPolizas()
         {
-            return _unitOfWork.PolizasRepository.GetAll().ToList();
+            var polizas = _unitOfWork.PolizasRepository.GetAll().ToList();
+
+            return polizas.Select(t => new RespuestaPoliza
+            {
+                IdCliente = t.IdCliente,
+                IdPoliza = t.IdPoliza,
+                Cobertura = t.Cobertura,
+                Descripcion = t.Descripcion,
+                FechaInicioVigencia = t.FechaInicioVigencia,
+                IdTipoCubrimiento = t.IdTipoCubrimiento,
+                IdTipoRiesgo = t.IdTipoRiesgo,
+                Nombre = t.Nombre,
+                PeriodoCobertura = t.PeriodoCobertura,
+                PrecioPoliza = t.PrecioPoliza,
+                Estado = t.Estado
+            }).ToList();
         }
 
         public Poliza ObtenerPoliza(int id)
@@ -38,9 +54,34 @@
             return _unitOfWork.PolizasRepository.Find(id);
         }
 
-        public List<Poliza> ObtenerPolizasCliente(int id)
+        public List<RespuestaPoliza> ObtenerPolizasCliente(int id)
         {
-            return _unitOfWork.PolizasRepository.Find(t => t.IdCliente == id).ToList();
+            var polizas = _unitOfWork.PolizasRepository.Find(t => t.IdCliente == id).ToList();
+
+            return polizas.Select(t => new RespuestaPoliza
+            {
+                IdCliente = t.IdCliente,
+                IdPoliza = t.IdPoliza,
+                Cobertura = t.Cobertura,
+                Descripcion = t.Descripcion,
+                FechaInicioVigencia = t.FechaInicioVigencia,
+                IdTipoCubrimiento = t.IdTipoCubrimiento,
+                IdTipoRiesgo = t.IdTipoRiesgo,
+                Nombre = t.Nombre,
+                PeriodoCobertura = t.PeriodoCobertura,
+                PrecioPoliza = t.PrecioPoliza,
+                Estado = t.Estado,
+                TipoCubrimiento = new RespuestaTipoCubrimiento
+                {
+                    IdTipoCubrimiento = t.TipoCubrimiento.IdTipoCubrimiento,
+                    Nombre = t.TipoCubrimiento.Nombre
+                },
+                TipoRiesgo = new RespuestaTipoRiesgo
+                {
+                    IdTipoRiesgo = t.TipoRiesgo.IdTipoRiesgo,
+                    Nombre = t.TipoRiesgo.Nombre
+                }
+            }).ToList();
         }
 
         public void RegistrarPoliza(Poliza poliza)
@@ -54,6 +95,9 @@
             {
                 throw new ExcepcionValidacion(UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorRiesgoAlto.ToString()));
             }
+
+            // Creo la póliza con Estado "Activo"
+            poliza.Estado = true;
 
             _unitOfWork.PolizasRepository.Add(poliza);
             _unitOfWork.Save();
@@ -71,7 +115,20 @@
                 throw new ExcepcionValidacion(UtilidadesGenerico.LeerMensaje(CodigosMensajes.ErrorRiesgoAlto.ToString()));
             }
 
-            _unitOfWork.PolizasRepository.Edit(poliza);
+            var polizaUpdate = this.ObtenerPoliza(poliza.IdPoliza);
+
+            polizaUpdate.Cobertura = poliza.Cobertura;
+            polizaUpdate.Descripcion = poliza.Descripcion;
+            polizaUpdate.Estado = poliza.Estado;
+            polizaUpdate.FechaInicioVigencia = poliza.FechaInicioVigencia;
+            polizaUpdate.IdCliente = poliza.IdCliente;
+            polizaUpdate.IdTipoCubrimiento = poliza.IdTipoCubrimiento;
+            polizaUpdate.IdTipoRiesgo = poliza.IdTipoRiesgo;
+            polizaUpdate.Nombre = poliza.Nombre;
+            polizaUpdate.PeriodoCobertura = poliza.PeriodoCobertura;
+            polizaUpdate.PrecioPoliza = poliza.PrecioPoliza;
+
+            _unitOfWork.PolizasRepository.Edit(polizaUpdate);
             _unitOfWork.Save();
         }
 
@@ -89,18 +146,30 @@
         /// Obtengo la lista de tipo de riesgo
         /// </summary>
         /// <returns>Lista de tipos de riesgo</returns>
-        public List<TipoRiesgo> ObtenerTiposRiesgo()
+        public List<RespuestaTipoRiesgo> ObtenerTiposRiesgo()
         {
-            return _unitOfWork.TipoRiesgoRepository.GetAll().ToList();
+            var tipos = _unitOfWork.TipoRiesgoRepository.GetAll();
+
+            return tipos.Select(t => new RespuestaTipoRiesgo
+            {
+                Nombre = t.Nombre,
+                IdTipoRiesgo = t.IdTipoRiesgo
+            }).ToList(); ;
         }
 
         /// <summary>
         /// Obtengo la lista de tipo de cubrimiento
         /// </summary>
         /// <returns>Lista de tipos de cubrimiento</returns>
-        public List<TipoCubrimiento> ObtenerTiposCubrimiento()
+        public List<RespuestaTipoCubrimiento> ObtenerTiposCubrimiento()
         {
-            return _unitOfWork.TipoCubrimientoRepository.GetAll().ToList();
+            var tipos = _unitOfWork.TipoCubrimientoRepository.GetAll().ToList();
+
+            return tipos.Select(t => new RespuestaTipoCubrimiento
+            {
+                Nombre = t.Nombre,
+                IdTipoCubrimiento = t.IdTipoCubrimiento
+            }).ToList(); ;
         }
     }
 }

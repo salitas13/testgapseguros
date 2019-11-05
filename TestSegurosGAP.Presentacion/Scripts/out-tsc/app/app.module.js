@@ -15,7 +15,7 @@ var edit_client_component_1 = require("./edit-client/edit-client.component");
 var list_client_component_1 = require("./list-client/list-client.component");
 var list_insurance_component_1 = require("./list-insurance/list-insurance.component");
 var add_insurance_component_1 = require("./add-insurance/add-insurance.component");
-//import { EditInsuranceComponent } from './edit-insurance/add-insurance.component'; 
+var edit_insurance_component_1 = require("./edit-insurance/edit-insurance.component");
 var api_service_1 = require("./core/api.service");
 var http_1 = require("@angular/common/http");
 var forms_1 = require("@angular/forms");
@@ -34,6 +34,7 @@ var AppModule = /** @class */ (function () {
                 list_client_component_1.ListClientComponent,
                 list_insurance_component_1.ListInsuranceComponent,
                 add_insurance_component_1.AddInsuranceComponent,
+                edit_insurance_component_1.EditInsuranceComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,

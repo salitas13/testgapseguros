@@ -41,15 +41,15 @@ var LoginComponent = /** @class */ (function () {
         });
     };
     LoginComponent.prototype.ngOnInit = function () {
+        this.loginForm = this.formBuilder.group({
+            username: ['', forms_1.Validators.compose([forms_1.Validators.required])],
+            password: ['', forms_1.Validators.required]
+        });
         if (window.localStorage.getItem('token')) {
             this.router.navigate(['list-client']);
             return;
         }
         window.localStorage.removeItem('token');
-        this.loginForm = this.formBuilder.group({
-            username: ['', forms_1.Validators.compose([forms_1.Validators.required])],
-            password: ['', forms_1.Validators.required]
-        });
     };
     LoginComponent = __decorate([
         core_1.Component({

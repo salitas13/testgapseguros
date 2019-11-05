@@ -35,15 +35,16 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
 
+        this.loginForm = this.formBuilder.group({
+          username: ['', Validators.compose([Validators.required])],
+          password: ['', Validators.required]
+        });
+
         if (window.localStorage.getItem('token')) {
             this.router.navigate(['list-client']);
             return;
         }
 
         window.localStorage.removeItem('token');
-        this.loginForm = this.formBuilder.group({
-          username: ['', Validators.compose([Validators.required])],
-          password: ['', Validators.required]
-        });
       }
 }

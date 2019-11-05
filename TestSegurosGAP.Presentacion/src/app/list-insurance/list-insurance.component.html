@@ -1,36 +1,45 @@
 <div class="col-md-6 user-container">
-  <h2 style="margin: auto"> Detalles de polizas: {{nombrecliente}}</h2>
-  <button class="btn btn-danger" style="width:200px" (click)="addInsurance()"> Adicionar poliza</button>
-  <table class="table table-striped">
-    <thead>
-        <tr>
-            <th class="hidden">Id</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>FechaInicioVigencia</th>
-            <th>Periodo cobertura</th>
-            <th>PrecioPoliza</th>
-            <th>Tipo cubrimiento</th>
-            <th>Tipo riesgo</th>
-            <th>Cobertura</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let insurance of insurances">
-            <td class="hidden">{{insuranre.IdPoliza}}</td>
-            <td>{{insurance.Nombre}}</td>
-            <td>{{insurance.Descripcion}}</td>
-            <td>{{insurance.FechaInicioVigencia}}</td>
-            <td>{{insurance.PeriodoCobertura}}</td>
-            <td>{{insurance.PrecioPoliza}}</td>
-            <td>{{insurance.TipoCubrimiento.Nombre}}</td>
-            <td>{{insurance.TipoRiesgo.Nombre}}</td>
-            <td>{{insurance.Cobertura}}%</td>
-            <td>
-                <button class="btn btn-success" (click)="viewInsuranceClient(insurance)"> Cancelar</button>
-                <button class="btn btn-success" (click)="editInsurance(insurance)" style="margin-left: 20px;"> Editar</button>
-            </td>
-        </tr>
-    </tbody>
-  </table>
+    <br />
+    <h2 style="margin: auto">Detalles de polizas</h2>
+    <br />
+    <button class="btn btn-danger" style="width:200px" (click)="addInsurance()"> Adicionar poliza</button>
+    <br />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="hidden">Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>FechaInicioVigencia</th>
+                <th>Periodo cobertura</th>
+                <th>PrecioPoliza</th>
+                <th>Tipo cubrimiento</th>
+                <th>Tipo riesgo</th>
+                <th>Cobertura</th>
+                <th>Estado</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let insurance of insurances">
+                <td class="hidden">{{insurance.IdPoliza}}</td>
+                <td>{{insurance.Nombre}}</td>
+                <td>{{insurance.Descripcion}}</td>
+                <td>{{insurance.FechaInicioVigencia}}</td>
+                <td>{{insurance.PeriodoCobertura}}</td>
+                <td>{{insurance.PrecioPoliza}}</td>
+                <td>{{insurance.TipoCubrimiento.Nombre}}</td>
+                <td>{{insurance.TipoRiesgo.Nombre}}</td>
+                <td>{{insurance.Cobertura}}%</td>
+                <td>{{insurance.Estado ? 'Activo' : 'Cancelado'}}</td>
+                <td>
+                    <button class="btn btn-success" (click)="cancelInsurance(insurance)" style="margin-left: 5px;">Cancelar</button>
+                </td>
+                <td>
+                    <button class="btn btn-success" (click)="editInsurance(insurance)" style="margin-left: 5px;">Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

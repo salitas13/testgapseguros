@@ -17,10 +17,10 @@ export class AddClientComponent implements OnInit {
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       IdCliente: [],
-      Nombres: ['', Validators.required],
-      Apellidos: ['', Validators.required],
-      FechaNacimiento: ['', Validators.required],
-      Cedula: ['', Validators.required]
+        Nombres: ['', [Validators.required, Validators.minLength(50)]],
+        Apellidos: ['', [Validators.required, Validators.minLength(50)]],
+        FechaNacimiento: ['', Validators.required],
+        Cedula: ['', [Validators.required, Validators.minLength(10)]]
     });
 
   }
