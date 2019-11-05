@@ -121,7 +121,7 @@ var EditInsuranceComponent = /** @class */ (function () {
                 _this.router.navigate(['list-insurance'], { queryParams: { clientId: _this.editForm.value.IdCliente.toString() } });
             }
             else {
-                alert(data.message);
+                alert('El porcentaje de cubrimiento no puede ser superior al 50% ya que el riesgo es Alto');
             }
         }, function (error) {
             if (error instanceof http_1.HttpErrorResponse) {

@@ -105,7 +105,7 @@ var AddInsuranceComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.status === 200) {
                 alert('Poliza creada satisfactoriamente.');
-                _this.router.navigate(['list-insurance']);
+                _this.router.navigate(['list-insurance'], { queryParams: { clientId: _this.clientId } });
             }
             else {
                 // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente

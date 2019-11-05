@@ -111,7 +111,7 @@ export class AddInsuranceComponent implements OnInit {
             .subscribe(data => {
                 if (data.status === 200) {
                     alert('Poliza creada satisfactoriamente.');
-                    this.router.navigate(['list-insurance']);
+                    this.router.navigate(['list-insurance'], { queryParams: { clientId: this.clientId } });
                 } else {
                     // Error en la validación de la cobertura de la poliza mostrar mensaje al cliente
                     alert('El porcentaje de cubrimiento no puede ser superior al 50%');

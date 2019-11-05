@@ -37,7 +37,8 @@ var AddClientComponent = /** @class */ (function () {
                 _this.router.navigate(['list-client']);
             }
             else {
-                alert(data.message);
+                // Error en la validaci�n de la cobertura de la poliza mostrar mensaje al cliente
+                alert('El porcentaje de cubrimiento no puede ser superior al 50% ya que el riesgo es Alto');
             }
         });
     };
