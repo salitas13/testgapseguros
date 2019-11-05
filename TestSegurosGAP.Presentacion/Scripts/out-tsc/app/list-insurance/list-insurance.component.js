@@ -69,12 +69,17 @@ var ListInsuranceComponent = /** @class */ (function () {
     ;
     ListInsuranceComponent.prototype.cancelInsurance = function (insurance) {
         var _this = this;
-        insurance.Estado = false;
+        insurance.Estado = !insurance.Estado;
         this.apiService.updateInsurance(insurance)
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza cancelada satisfactoriamente.');
+                if (!insurance.Estado) {
+                    alert('P�liza cancelada satisfactoriamente.');
+                }
+                else {
+                    alert('P�liza activada satisfactoriamente.');
+                }
                 _this.updateList();
             }
             else {

@@ -34,7 +34,7 @@
                 <td>{{insurance.Cobertura}}%</td>
                 <td>{{insurance.Estado ? 'Activo' : 'Cancelado'}}</td>
                 <td>
-                    <button class="btn btn-success" (click)="cancelInsurance(insurance)" style="margin-left: 5px;">Cancelar</button>
+                    <button class="btn btn-success" (click)="cancelInsurance(insurance)" style="margin-left: 5px;">{{insurance.Estado ? 'Cancelar' : 'Activar'}}</button>
                 </td>
                 <td>
                     <button class="btn btn-success" (click)="editInsurance(insurance)" style="margin-left: 5px;">Editar</button>

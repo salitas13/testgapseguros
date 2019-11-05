@@ -968,7 +968,7 @@ module.exports = ".user-container {\n  display: -webkit-box;\n  display: flex;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-6 user-container\">\r\n    <br />\r\n    <h2 style=\"margin: auto\">Detalles de polizas</h2>\r\n    <br />\r\n    <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addInsurance()\"> Adicionar poliza</button>\r\n    <br />\r\n    <table class=\"table table-striped\">\r\n        <thead>\r\n            <tr>\r\n                <th class=\"hidden\">Id</th>\r\n                <th>Nombre</th>\r\n                <th>Descripci�n</th>\r\n                <th>FechaInicioVigencia</th>\r\n                <th>Periodo cobertura</th>\r\n                <th>PrecioPoliza</th>\r\n                <th>Tipo cubrimiento</th>\r\n                <th>Tipo riesgo</th>\r\n                <th>Cobertura</th>\r\n                <th>Estado</th>\r\n                <th></th>\r\n                <th></th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let insurance of insurances\">\r\n                <td class=\"hidden\">{{insurance.IdPoliza}}</td>\r\n                <td>{{insurance.Nombre}}</td>\r\n                <td>{{insurance.Descripcion}}</td>\r\n                <td>{{insurance.FechaInicioVigencia}}</td>\r\n                <td>{{insurance.PeriodoCobertura}}</td>\r\n                <td>{{insurance.PrecioPoliza}}</td>\r\n                <td>{{insurance.TipoCubrimiento.Nombre}}</td>\r\n                <td>{{insurance.TipoRiesgo.Nombre}}</td>\r\n                <td>{{insurance.Cobertura}}%</td>\r\n                <td>{{insurance.Estado ? 'Activo' : 'Cancelado'}}</td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"cancelInsurance(insurance)\" style=\"margin-left: 5px;\">Cancelar</button>\r\n                </td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"editInsurance(insurance)\" style=\"margin-left: 5px;\">Editar</button>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\n"
+module.exports = "<div class=\"col-md-6 user-container\">\r\n    <br />\r\n    <h2 style=\"margin: auto\">Detalles de polizas</h2>\r\n    <br />\r\n    <button class=\"btn btn-danger\" style=\"width:200px\" (click)=\"addInsurance()\"> Adicionar poliza</button>\r\n    <br />\r\n    <table class=\"table table-striped\">\r\n        <thead>\r\n            <tr>\r\n                <th class=\"hidden\">Id</th>\r\n                <th>Nombre</th>\r\n                <th>Descripci�n</th>\r\n                <th>FechaInicioVigencia</th>\r\n                <th>Periodo cobertura</th>\r\n                <th>PrecioPoliza</th>\r\n                <th>Tipo cubrimiento</th>\r\n                <th>Tipo riesgo</th>\r\n                <th>Cobertura</th>\r\n                <th>Estado</th>\r\n                <th></th>\r\n                <th></th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let insurance of insurances\">\r\n                <td class=\"hidden\">{{insurance.IdPoliza}}</td>\r\n                <td>{{insurance.Nombre}}</td>\r\n                <td>{{insurance.Descripcion}}</td>\r\n                <td>{{insurance.FechaInicioVigencia}}</td>\r\n                <td>{{insurance.PeriodoCobertura}}</td>\r\n                <td>{{insurance.PrecioPoliza}}</td>\r\n                <td>{{insurance.TipoCubrimiento.Nombre}}</td>\r\n                <td>{{insurance.TipoRiesgo.Nombre}}</td>\r\n                <td>{{insurance.Cobertura}}%</td>\r\n                <td>{{insurance.Estado ? 'Activo' : 'Cancelado'}}</td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"cancelInsurance(insurance)\" style=\"margin-left: 5px;\">{{insurance.Estado ? 'Cancelar' : 'Activar'}}</button>\r\n                </td>\r\n                <td>\r\n                    <button class=\"btn btn-success\" (click)=\"editInsurance(insurance)\" style=\"margin-left: 5px;\">Editar</button>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\n"
 
 /***/ }),
 
@@ -1051,12 +1051,17 @@ var ListInsuranceComponent = /** @class */ (function () {
     ;
     ListInsuranceComponent.prototype.cancelInsurance = function (insurance) {
         var _this = this;
-        insurance.Estado = false;
+        insurance.Estado = !insurance.Estado;
         this.apiService.updateInsurance(insurance)
             .pipe(operators_1.first())
             .subscribe(function (data) {
             if (data.status === 200) {
-                alert('P�liza cancelada satisfactoriamente.');
+                if (!insurance.Estado) {
+                    alert('P�liza cancelada satisfactoriamente.');
+                }
+                else {
+                    alert('P�liza activada satisfactoriamente.');
+                }
                 _this.updateList();
             }
             else {

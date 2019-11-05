@@ -72,13 +72,19 @@ export class ListInsuranceComponent implements OnInit {
     };
 
     cancelInsurance(insurance: Insurance): void {
-        insurance.Estado = false;
+        insurance.Estado = !insurance.Estado;
+        
         this.apiService.updateInsurance(insurance)
             .pipe(first())
             .subscribe(
                 data => {
                     if (data.status === 200) {
-                        alert('Póliza cancelada satisfactoriamente.');
+                        if (!insurance.Estado) {
+                            alert('Póliza cancelada satisfactoriamente.');
+                        } else {
+                            alert('Póliza activada satisfactoriamente.');
+                        }
+                            
                         this.updateList();
                     } else {
                         alert(data.message);
